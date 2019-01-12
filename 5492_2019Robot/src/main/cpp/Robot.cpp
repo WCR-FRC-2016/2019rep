@@ -15,15 +15,21 @@
 #include <frc/WPILib.h>
 #include <ctre/Phoenix.h>
 #include <subsystems/DriveBase.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
 DriveBase Robot::m_drivebase;
+std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+nt::NetworkTableEntry ledmode;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
   m_chooser.AddOption("My Auto", &m_myAuto);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   m_oi.OIInit();
+
 }
 
 /**
@@ -34,7 +40,20 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  
+  double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
+  double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
+  double targetArea = table->GetNumber("ta",0.0);
+  double targetSkew = table->GetNumber("ts",0.0); 
+  frc::SmartDashboard::PutNumber("LimelightX",targetOffsetAngle_Horizontal);
+  frc::SmartDashboard::PutNumber("LimelightY",targetOffsetAngle_Vertical);
+  frc::SmartDashboard::PutNumber("LimelightA",targetArea);
+  frc::SmartDashboard::PutNumber("LimelightS",targetSkew);
+  ledmode = table->GetEntry("ledMode");
+  ledmode.SetDouble(3); //LED always on.
+  
+}
 
 /**
  * This function is called once each time the robot enters Disabled mode. You
