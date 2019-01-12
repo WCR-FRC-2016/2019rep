@@ -32,6 +32,11 @@ initialized = true;
 		BackR = new WPI_TalonSRX (backRightDrive);
 		_diffDrive = new frc::DifferentialDrive (*FrontL, *FrontR);
 
+		FrontR->ConfigFactoryDefault();
+		FrontL->ConfigFactoryDefault();
+		BackR->ConfigFactoryDefault();
+		BackL->ConfigFactoryDefault();
+
 		FrontR->SetInverted(true);
 		FrontL->SetInverted(false);
 		BackR->SetInverted(true);
@@ -89,15 +94,15 @@ initialized = true;
 		FrontR->SetSelectedSensorPosition(0,0,0);
 		FrontL->SetSelectedSensorPosition(0,0,0);
 
-		_diffDrive->SetSafetyEnabled(true);
+		_diffDrive->SetSafetyEnabled(false);
 
-		BackL->SetSafetyEnabled(true);
-		BackR->SetSafetyEnabled(true);
+		BackL->SetSafetyEnabled(false);
+		BackR->SetSafetyEnabled(false);
 		_diffDrive->SetExpiration(.5);
 
 		BackL->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, frontLeftDrive);
 		BackR->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, frontRightDrive);
-  
+		printf("Done setting up motor \n");
 }
 void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
   	double parsedLeft;

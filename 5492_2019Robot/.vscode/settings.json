@@ -14,5 +14,6 @@
   "wpilib.online": true,
   "files.associations": {
     "iostream": "cpp"
-  }
+  },
+  "C_Cpp.default.configurationProvider": "vscode-wpilib"
 }
