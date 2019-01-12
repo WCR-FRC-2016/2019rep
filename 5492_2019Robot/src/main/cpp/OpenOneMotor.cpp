@@ -2,7 +2,7 @@
 #include "RobotMap.h"
 #include "OI.h"
 #include "OpenOneMotor.h"
-#include <IterativeRobot.h>
+#include <frc/IterativeRobot.h>
 #include "OI.h"
 #include <iostream>
 #include <ctre/Phoenix.h>
@@ -20,4 +20,4 @@ WPI_TalonSRX * OpenOneMotor::Open (int DeviceNumber) {
 	ReturnTalonObj->EnableCurrentLimit(CurrentLimit);
 	ReturnTalonObj->SetSafetyEnabled(true);
 	return ReturnTalonObj;
-};
+}

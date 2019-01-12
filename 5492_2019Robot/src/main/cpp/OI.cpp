@@ -8,7 +8,42 @@
 #include "OI.h"
 
 #include <frc/WPILib.h>
+#include <frc/Joystick.h>
+#include <frc/GenericHID.h>
+#include <frc/XboxController.h>
+
 
 OI::OI() {
+  _driverStick = 0;
+	_manualStick = 0;
   // Process operator interface input here.
 }
+void OI::OIInit(){
+  if (_driverStick == 0)
+	{
+		_driverStick = new frc::XboxController(0);
+	}
+	if (_manualStick == 0)
+	{
+		_manualStick = new frc::XboxController(1);
+	}
+}double OI::ReturnDriverXAxis(){
+	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
+
+}
+double OI::ReturnDriverYAxis(){
+	return DeadBand(_driverStick->GetY(frc::GenericHID::kLeftHand));
+}
+
+double OI::DeadBand(double joystick) {
+	if (-0.2 < joystick && joystick < 0.2) {
+		joystick = 0;
+	}
+		return joystick;
+}
+
+double OI::ReturnManualLeftYAxis(){
+	return DeadBand(_manualStick->GetY(frc::GenericHID::kLeftHand));
+}
+
+
