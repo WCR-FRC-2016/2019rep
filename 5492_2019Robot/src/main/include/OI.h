@@ -15,6 +15,7 @@ class OI {
 	void OIInit();
 	double DeadBand(double joystick);
 	double ReturnManualLeftYAxis();
+	bool ReturnDriverXButton();
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;
