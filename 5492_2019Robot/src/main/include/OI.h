@@ -7,6 +7,9 @@
 
 #pragma once
 #include <frc/XboxController.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 class OI {
  public:
   OI(); 
@@ -16,7 +19,17 @@ class OI {
 	double DeadBand(double joystick);
 	double ReturnManualLeftYAxis();
 	bool ReturnDriverXButton();
+
+	double targetOffsetAngle_Horizontal;
+  double targetOffsetAngle_Vertical;
+  double targetArea;
+  double targetSkew;
+	nt::NetworkTableEntry ledmode;
+	std::shared_ptr<NetworkTable> table;
+	double ReturnVisionX();
+	
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;
+	
 };

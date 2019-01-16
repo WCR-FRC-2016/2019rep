@@ -26,8 +26,7 @@ class Robot : public frc::TimedRobot {
   static ExampleSubsystem m_subsystem;
   static OI m_oi;
   static DriveBase m_drivebase;
-  static std::shared_ptr<NetworkTable> table;
-  static nt::NetworkTableEntry ledmode;
+  
   void RobotInit() override;
   void RobotPeriodic() override;
   void DisabledInit() override;
@@ -40,10 +39,7 @@ class Robot : public frc::TimedRobot {
 
 
   //LimeLight Vlaues
-  static double targetOffsetAngle_Horizontal;
-  static double targetOffsetAngle_Vertical;
-  static double targetArea;
-  static double targetSkew;
+  
  private:
   // Have it null by default so that if testing teleop it
   // doesn't have undefined behavior and potentially crash.

@@ -29,13 +29,14 @@ void TankDrive::Execute() {
     double Kp = -0.1;
     double adjust = 0;
     double min_command = .05;
-    if (Robot::targetOffsetAngle_Horizontal > 0)
+    double offset = Robot::m_oi.ReturnVisionX();
+    if (offset > 0)
     {
-      adjust = Kp*Robot::targetOffsetAngle_Horizontal - min_command;
+      adjust = Kp * offset - min_command;
     }
     else
     {
-      adjust = Kp*Robot::targetOffsetAngle_Horizontal + min_command;
+      adjust = Kp * offset + min_command;
     }
 
     Robot::m_drivebase.ArcadeDrive(adjust, Robot::m_oi.ReturnDriverYAxis());

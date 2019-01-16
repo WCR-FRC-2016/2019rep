@@ -11,11 +11,14 @@
 #include <frc/Joystick.h>
 #include <frc/GenericHID.h>
 #include <frc/XboxController.h>
-
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 
 OI::OI() {
   _driverStick = 0;
 	_manualStick = 0;
+	table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
   // Process operator interface input here.
 }
 void OI::OIInit(){
@@ -48,4 +51,8 @@ double OI::ReturnManualLeftYAxis(){
 bool OI::ReturnDriverXButton() {
 	return _driverStick->GetXButton();
 }
+double OI::ReturnVisionX(){
+	return targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
 
+  
+}
