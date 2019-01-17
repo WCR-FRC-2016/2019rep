@@ -26,17 +26,17 @@ void TankDrive::Initialize() {
 void TankDrive::Execute() {
   if (Robot::m_oi.ReturnDriverXButton())
   {
-    double Kp = 1.0/27.0;
+    double Kp = -0.1;
     double adjust = 0;
-    double min_command = .1;
+    double min_command = .05;
     double offset = Robot::m_oi.ReturnVisionX();
     if (offset > 0)
     {
-      adjust = Kp * offset + min_command;
+      adjust = Kp * offset - min_command;
     }
     else
     {
-      adjust = Kp * offset - min_command;
+      adjust = Kp * offset + min_command;
     }
 
     Robot::m_drivebase.ArcadeDrive(adjust, -Robot::m_oi.ReturnDriverYAxis());
