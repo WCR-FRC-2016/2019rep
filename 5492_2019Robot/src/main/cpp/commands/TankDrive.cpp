@@ -39,10 +39,10 @@ void TankDrive::Execute() {
       adjust = Kp * offset - min_command;
     }
 
-    Robot::m_drivebase.ArcadeDrive(adjust, Robot::m_oi.ReturnDriverYAxis());
+    Robot::m_drivebase.ArcadeDrive(adjust, -Robot::m_oi.ReturnDriverYAxis());
   }
   else{
-    Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), Robot::m_oi.ReturnDriverYAxis());
+    Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
   }
 }
 
