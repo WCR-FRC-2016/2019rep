@@ -7,7 +7,9 @@
 
 #pragma once
 #include <frc/XboxController.h>
-
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 class OI {
  public:
   OI(); 
