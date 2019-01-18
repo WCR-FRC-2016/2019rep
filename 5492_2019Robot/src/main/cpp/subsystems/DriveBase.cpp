@@ -115,34 +115,20 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 
 	parsedY = pow((yAxis>0)?yAxis:-yAxis, power) * (yAxis / (yAxis>0)?yAxis:-yAxis);
 
-	if (yAxis < 0) // forward back
+	if (yAxis < 0) // forward
 	{
 		//TO BE
 		//FILLED IN
 		//Turning Left?
-		if (xAxis > 0) //right forwards
-		{
-			parsedLeft = parsedY - parsedX;
-			parsedRight = (parsedY > parsedX)?parsedY:parsedX;
-		}
-		else //left forwards
-		{
-			parsedLeft = (-parsedY > -parsedX)?parsedY:-parsedX;
-			parsedRight = parsedY + parsedX;
-		}
+		
+			parsedLeft = parsedY + parsedX;
+			parsedRight = parsedY - parsedX;
+		
 	}
 	else //backwards
 	{
-		if (xAxis > 0) //right
-		{
-			parsedLeft = (-parsedY > parsedX)?parsedY:-parsedX;
-			parsedRight = parsedY + parsedX;
-		}
-		else //left
-		{
 			parsedLeft = parsedY - parsedX;
-			parsedRight = (parsedY > -parsedX)?parsedY:parsedX;
-		}
+			parsedRight = parsedY + parsedX;
 	}
 	_diffDrive->TankDrive(-parsedLeft, parsedRight);
 

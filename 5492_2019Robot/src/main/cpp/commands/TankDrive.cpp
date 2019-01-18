@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include <commands/TankDrive.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include "Robot.h"
 #include "OI.h"
 #include <networktables/NetworkTable.h>
@@ -26,9 +27,9 @@ void TankDrive::Initialize() {
 void TankDrive::Execute() {
   if (Robot::m_oi.ReturnDriverXButton())
   {
-    double Kp = 1.0/27.0;
+    double Kp = 0.03;
     double adjust = 0;
-    double min_command = .1;
+    double min_command = .3;
     double offset = Robot::m_oi.ReturnVisionX();
     if (offset > 0)
     {
@@ -39,7 +40,8 @@ void TankDrive::Execute() {
       adjust = Kp * offset - min_command;
     }
 
-    Robot::m_drivebase.ArcadeDrive(adjust, -Robot::m_oi.ReturnDriverYAxis());
+    Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, -Robot::m_oi.ReturnDriverYAxis());
+    frc::SmartDashboard::PutNumber("Vision Adjustment", adjust);
   }
   else{
     Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
