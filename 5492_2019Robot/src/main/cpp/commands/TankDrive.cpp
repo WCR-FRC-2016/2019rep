@@ -27,9 +27,9 @@ void TankDrive::Initialize() {
 void TankDrive::Execute() {
   if (Robot::m_oi.ReturnDriverXButton())
   {
-    double Kp = 0.03;
+    double Kp = 0.0095;
     double adjust = 0;
-    double min_command = .3;
+    double min_command = .35;
     double offset = Robot::m_oi.ReturnVisionX();
     if (offset > 0)
     {
