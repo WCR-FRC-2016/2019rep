@@ -10,6 +10,7 @@
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
+#include <WPILib.h>
 class OI {
  public:
   OI(); 
@@ -20,6 +21,10 @@ class OI {
 	double ReturnManualLeftYAxis();
 	bool ReturnDriverXButton();
 	double visionData[2] = {0.0,0.0};
+	bool* ReturnLightSensors();
+	bool lightData[2] = {false,false}; 
+	static frc::DigitalInput LightSensorOne;
+	static frc::DigitalInput LightSensorTwo;
 
 	double targetOffsetAngle_Horizontal;
   double targetOffsetAngle_Vertical;

@@ -59,3 +59,12 @@ double* OI::ReturnVisionX(){
 	return visionData;
   
 }
+bool* OI::ReturnLightSensors() {
+	LightSensorOne = frc::DigitalInput::DigitalInput(1);
+	LightSensorTwo = frc::DigitalInput::DigitalInput(2);
+	lightData[0] = LightSensorOne.Get();
+	lightData[1] = LightSensorTwo.Get();
+	return lightData;
+}
+
+
