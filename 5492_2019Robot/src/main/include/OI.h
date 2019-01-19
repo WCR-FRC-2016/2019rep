@@ -10,7 +10,7 @@
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
-#include <WPILib.h>
+#include <frc/WPILib.h>
 class OI {
  public:
   OI(); 
@@ -23,9 +23,7 @@ class OI {
 	double visionData[2] = {0.0,0.0};
 	bool* ReturnLightSensors();
 	bool lightData[2] = {false,false}; 
-	static frc::DigitalInput LightSensorOne;
-	static frc::DigitalInput LightSensorTwo;
-
+	
 	double targetOffsetAngle_Horizontal;
   double targetOffsetAngle_Vertical;
   double targetArea;
@@ -37,5 +35,6 @@ class OI {
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;
-	
+	frc::DigitalInput* LightSensorOne;
+	frc::DigitalInput* LightSensorTwo;
 };

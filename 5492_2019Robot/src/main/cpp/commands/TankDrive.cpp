@@ -38,11 +38,11 @@ void TankDrive::Execute() {
 
     Kp = Kpa * area - Kpa * 0.03 + 0.03; // Kp = Kpa * area - Kpa * Close area + Close Kp
     
-    if area == 0 {
-      if lightArray[0]{
+    if (area == 0) {
+      if (lightArray[0]){
         adjust = 0.4;
       }
-      else if lightArray[1] {
+      else if (lightArray[1]) {
         adjust = -0.4;
       }
       else{
@@ -58,13 +58,13 @@ void TankDrive::Execute() {
       {
         adjust = Kp * offset - min_command;
       }
-
+    }
     Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, -Robot::m_oi.ReturnDriverYAxis());
     frc::SmartDashboard::PutNumber("Vision Adjustment", adjust);
-  }
-  else{
+    }
+    else{
     Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
-  }
+    }
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -14,6 +14,7 @@
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
+#include <frc/WPILib.h>
 
 OI::OI() {
   _driverStick = 0;
@@ -30,7 +31,10 @@ void OI::OIInit(){
 	{
 		_manualStick = new frc::XboxController(1);
 	}
-}double OI::ReturnDriverXAxis(){
+	LightSensorOne = new frc::DigitalInput(1);
+	LightSensorTwo = new frc::DigitalInput(2);
+}
+double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
 }
@@ -60,10 +64,8 @@ double* OI::ReturnVisionX(){
   
 }
 bool* OI::ReturnLightSensors() {
-	LightSensorOne = frc::DigitalInput::DigitalInput(1);
-	LightSensorTwo = frc::DigitalInput::DigitalInput(2);
-	lightData[0] = LightSensorOne.Get();
-	lightData[1] = LightSensorTwo.Get();
+	lightData[0] = LightSensorOne->Get();
+	lightData[1] = LightSensorTwo->Get();
 	return lightData;
 }
 
