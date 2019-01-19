@@ -52,10 +52,13 @@ initialized = true;
 		BackR->ConfigPeakCurrentDuration(1000,0);
 		BackL->ConfigPeakCurrentDuration(1000,0);
 
-		FrontR->ConfigOpenloopRamp(.3,0);
+
+		//This is our ramping for the robot, it has negative effects to Limelight :(
+
+		/* FrontR->ConfigOpenloopRamp(.3,0);
 		FrontL->ConfigOpenloopRamp(.3,0);
 		BackR->ConfigOpenloopRamp(.3,0);
-		BackL->ConfigOpenloopRamp(.3,0);
+		BackL->ConfigOpenloopRamp(.3,0); */
 
 		FrontR->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
 		FrontL->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
