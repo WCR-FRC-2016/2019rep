@@ -19,6 +19,7 @@ class OI {
 	double DeadBand(double joystick);
 	double ReturnManualLeftYAxis();
 	bool ReturnDriverXButton();
+	double visionData[2] = {0.0,0.0};
 
 	double targetOffsetAngle_Horizontal;
   double targetOffsetAngle_Vertical;
@@ -26,7 +27,7 @@ class OI {
   double targetSkew;
 	nt::NetworkTableEntry ledmode;
 	std::shared_ptr<NetworkTable> table;
-	double ReturnVisionX();
+	double* ReturnVisionX();
 	
  private:
   frc::XboxController * _driverStick;

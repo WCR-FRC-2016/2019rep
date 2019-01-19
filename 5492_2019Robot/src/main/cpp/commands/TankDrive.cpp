@@ -30,7 +30,13 @@ void TankDrive::Execute() {
     double Kp = 0.0095;
     double adjust = 0;
     double min_command = .35;
-    double offset = Robot::m_oi.ReturnVisionX();
+    double* visionArray = Robot::m_oi.ReturnVisionX();
+    double offset = visionArray[0];
+    double area = visionArray[1];
+    double Kpa = 0.0;
+
+    Kp = Kpa * area;
+
     if (offset > 0)
     {
       adjust = Kp * offset + min_command;

@@ -51,8 +51,11 @@ double OI::ReturnManualLeftYAxis(){
 bool OI::ReturnDriverXButton() {
 	return _driverStick->GetXButton();
 }
-double OI::ReturnVisionX(){
-	return targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
-
+double* OI::ReturnVisionX(){
+	targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0); 
+	targetArea = table->GetNumber("ta",0.0);
+	visionData[0] = targetOffsetAngle_Horizontal;
+	visionData[1] = targetArea;
+	return visionData;
   
 }
