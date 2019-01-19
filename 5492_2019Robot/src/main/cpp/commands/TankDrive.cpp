@@ -33,9 +33,10 @@ void TankDrive::Execute() {
     double* visionArray = Robot::m_oi.ReturnVisionX();
     double offset = visionArray[0];
     double area = visionArray[1];
-    double Kpa = 0.0;
+    double Kpa = (0.0095-0.03)/(6.5-0.03); //(Far away Kp - Close Kp)/ (Far away area - Up close area)
 
-    Kp = Kpa * area;
+
+    Kp = Kpa * area - Kpa * 0.03 + 0.03; // Kp = Kpa * area - Kpa * Close area + Close Kp
 
     if (offset > 0)
     {
