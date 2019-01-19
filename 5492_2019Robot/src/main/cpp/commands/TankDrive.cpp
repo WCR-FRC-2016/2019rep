@@ -40,15 +40,13 @@ void TankDrive::Execute() {
     
     if area == 0 {
       if lightArray[0]{
-        adjust = 0;
+        adjust = 0.4;
+      }
+      else if lightArray[1] {
+        adjust = -0.4;
       }
       else{
-        if lightArray[1]{
-          adjust = 0.4;
-        }
-        else{
-          adjust = -0.4;
-        }
+        adjust = 0;
       }
     }
     else{
