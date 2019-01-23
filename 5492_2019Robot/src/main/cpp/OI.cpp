@@ -23,7 +23,7 @@ OI::OI() {
   // Process operator interface input here.
 }
 void OI::OIInit(){
-  if (_driverStick == 0)
+  	if (_driverStick == 0)
 	{
 		_driverStick = new frc::XboxController(0);
 	}
