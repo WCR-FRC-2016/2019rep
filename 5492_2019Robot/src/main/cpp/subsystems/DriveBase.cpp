@@ -52,13 +52,10 @@ initialized = true;
 		BackR->ConfigPeakCurrentDuration(1000,0);
 		BackL->ConfigPeakCurrentDuration(1000,0);
 
-
-		//This is our ramping for the robot, it has negative effects to Limelight :(
-
-		/* FrontR->ConfigOpenloopRamp(.3,0);
-		FrontL->ConfigOpenloopRamp(.3,0);
-		BackR->ConfigOpenloopRamp(.3,0);
-		BackL->ConfigOpenloopRamp(.3,0); */
+		FrontL->ConfigOpenloopRamp(RampTime, 0);
+    	FrontR->ConfigOpenloopRamp(RampTime, 0);
+   		BackL->ConfigOpenloopRamp(RampTime, 0);
+    	BackR->ConfigOpenloopRamp(RampTime, 0);
 
 		FrontR->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
 		FrontL->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
@@ -134,6 +131,14 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 			parsedRight = parsedY + parsedX;
 	}
 	_diffDrive->TankDrive(-parsedLeft, parsedRight);
+
+}
+void DriveBase::RampSwitch(bool rampOn) {
+	double ramp = (rampOn)?RampTime:0;
+	FrontL->ConfigOpenloopRamp(ramp, 0);
+    FrontR->ConfigOpenloopRamp(ramp, 0);
+   	BackL->ConfigOpenloopRamp(ramp, 0);
+    BackR->ConfigOpenloopRamp(ramp, 0);
 
 }
 void DriveBase::InitDefaultCommand() {

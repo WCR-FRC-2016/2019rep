@@ -18,4 +18,5 @@ class DriveBase : public frc::Subsystem {
   void DriveBaseInit();
   void InitDefaultCommand() override;
   void ArcadeDrive(double xAxis, double yAxis);
+  void RampSwitch(bool rampOn);
 };
