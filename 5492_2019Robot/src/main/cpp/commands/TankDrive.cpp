@@ -40,8 +40,32 @@ void TankDrive::Execute() {
     frc::SmartDashboard::PutBoolean("LightSensor1", lightArray[0]);
 
     Kp = Kpa * area - Kpa * 0.03 + 0.03; // Kp = Kpa * area - Kpa * Close area + Close Kp
-    
+    double forwardBack = -Robot::m_oi.ReturnDriverYAxis();
     if (area == 0) {
+      if ((lightArray[0] && lightArray[1])){ // 0 is left 1 is right, true = Don't see line, false = I see something
+        if (!Isee){  // No line seen
+          forwardBack = 0.0;
+          if (prevError > 0){ // turn right
+           adjust = 0.5;
+          }
+          else{
+            adjust = -0.5;
+          }
+        }
+        else{
+          adjust = 0;
+        }
+      }
+      else{
+        Isee = true;
+        if (!lightArray[0]) { // I do see something on the left
+        adjust = -0.5;
+        }
+        else{
+        adjust = 0.5;
+        }
+      }
+      
       /*if (lightArray[0]){
         adjust = 0.5;
       }
@@ -52,7 +76,7 @@ void TankDrive::Execute() {
         adjust = 0;
       }*/
       //Add back if we use light sensors
-      adjust = 0;
+      
     }
     else{
       if (offset > 0)
@@ -64,13 +88,14 @@ void TankDrive::Execute() {
         adjust = Kp * offset - min_command;
       }
     }
-    
-    Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, -Robot::m_oi.ReturnDriverYAxis());
+    Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, forwardBack);
     frc::SmartDashboard::PutNumber("Vision Adjustment", adjust);
+    prevError = offset;
   }
   else{
     Robot::m_drivebase.RampSwitch(true);
     Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
+    Isee = false;
   }
 }
 

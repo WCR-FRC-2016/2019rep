@@ -31,8 +31,8 @@ void OI::OIInit(){
 	{
 		_manualStick = new frc::XboxController(1);
 	}
+	LightSensorZero = new frc::DigitalInput(0);
 	LightSensorOne = new frc::DigitalInput(1);
-	LightSensorTwo = new frc::DigitalInput(2);
 }
 double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
@@ -64,8 +64,8 @@ double* OI::ReturnVisionX(){
   
 }
 bool* OI::ReturnLightSensors() {
-	lightData[0] = LightSensorOne->Get();
-	lightData[1] = LightSensorTwo->Get();
+	lightData[0] = LightSensorZero->Get();
+	lightData[1] = LightSensorOne->Get();
 	return lightData;
 }
 

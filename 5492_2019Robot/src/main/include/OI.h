@@ -35,6 +35,6 @@ class OI {
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;
+	frc::DigitalInput* LightSensorZero;
 	frc::DigitalInput* LightSensorOne;
-	frc::DigitalInput* LightSensorTwo;
 };

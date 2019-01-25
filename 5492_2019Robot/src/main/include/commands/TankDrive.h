@@ -12,6 +12,8 @@
 class TankDrive : public frc::Command {
  public:
   TankDrive();
+  double prevError = 0.0;
+  bool Isee = false;
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
