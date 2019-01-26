@@ -19,7 +19,7 @@
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
 DriveBase Robot::m_drivebase;
-
+CargoClaw Robot::m_cargoclaw;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);

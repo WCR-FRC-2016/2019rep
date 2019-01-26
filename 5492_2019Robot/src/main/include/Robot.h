@@ -16,6 +16,7 @@
 #include "commands/MyAutoCommand.h"
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/DriveBase.h"
+#include "subsystems/CargoClaw.h"
 
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
@@ -26,7 +27,7 @@ class Robot : public frc::TimedRobot {
   static ExampleSubsystem m_subsystem;
   static OI m_oi;
   static DriveBase m_drivebase;
-  
+  static CargoClaw m_cargoclaw;
   void RobotInit() override;
   void RobotPeriodic() override;
   void DisabledInit() override;
