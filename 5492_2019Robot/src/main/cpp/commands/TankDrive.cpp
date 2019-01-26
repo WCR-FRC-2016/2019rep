@@ -87,10 +87,10 @@ void TankDrive::Execute() {
       {
         adjust = Kp * offset - min_command;
       }
+      prevError = offset;
     }
     Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, forwardBack);
     frc::SmartDashboard::PutNumber("Vision Adjustment", adjust);
-    if(area !=0) prevError = offset;
   }
   else{
     Robot::m_drivebase.RampSwitch(true);
