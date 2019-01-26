@@ -23,7 +23,7 @@ WPI_TalonSRX* LiftFollower;
 
 DoWeEvenLift::DoWeEvenLift() : Subsystem("DoWeEvenLift") {}
 void DoWeEvenLift::LiftInit() {
-    liftIntialized = true;
+    liftInitialized = true;
     OpenOneMotor* OpenLiftMotor =  new OpenOneMotor();
     LiftLeader = OpenLiftMotor->Open(lift1);
     OpenLiftMotor->Invert = true;
@@ -42,7 +42,7 @@ void DoWeEvenLift::Lift(double joystick){
 void DoWeEvenLift::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
-    if (!liftIntialized){
+    if (!liftInitialized){
       DoWeEvenLift::LiftInit();
     }
     Robot::m_doweevenlift.SetDefaultCommand(new DeadLift() );

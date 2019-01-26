@@ -26,6 +26,9 @@ const int lift2 = 5;
 //Pneumatics
 const int pneuamticValve1 = 7;
 const int pneumaticValve2 = 8;
+//Arm
+const int arm1 = 12;
+const int arm2 = 13;
 
 const double RightP = 0.0678;
 const double RightI = 6.78E-6;

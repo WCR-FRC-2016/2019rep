@@ -7,17 +7,14 @@
 
 #pragma once
 
-#include <frc/commands/Subsystem.h>
+#include <frc/commands/Command.h>
 
-class DoWeEvenLift : public frc::Subsystem {
- private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  bool liftInitialized = false;
-
+class Flex : public frc::Command {
  public:
-  DoWeEvenLift();
-  void LiftInit();
-  void Lift(double joystick);
-  void InitDefaultCommand() override;
+  Flex();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

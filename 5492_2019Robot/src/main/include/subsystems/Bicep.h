@@ -9,15 +9,14 @@
 
 #include <frc/commands/Subsystem.h>
 
-class DoWeEvenLift : public frc::Subsystem {
+class Bicep : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  bool liftInitialized = false;
-
+  bool initialized = false;
  public:
-  DoWeEvenLift();
-  void LiftInit();
-  void Lift(double joystick);
+  Bicep();
+  void BicepStretch();
+  void Rotato(double joystick);
   void InitDefaultCommand() override;
 };

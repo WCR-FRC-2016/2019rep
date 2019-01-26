@@ -5,32 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/DeadLift.h"
-#include "subsystems/DoWeEvenLift.h"
-#include "OI.h"
+#include "commands/Flex.h"
 #include "Robot.h"
-DeadLift::DeadLift() {
+#include "OI.h"
+
+Flex::Flex() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(&Robot::m_doweevenlift);
+  Requires(&Robot::m_bicep);
 }
 
 // Called just before this Command runs the first time
-void DeadLift::Initialize() {
-  Robot::m_doweevenlift.LiftInit();
-}
+void Flex::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void DeadLift::Execute() {
-    Robot::m_doweevenlift.Lift(Robot::m_oi.ReturnManualLeftYAxis());
+void Flex::Execute() {
+  Robot::m_bicep.Rotato(Robot::m_oi.ReturnManualRightYAxis());
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DeadLift::IsFinished() { return false; }
+bool Flex::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void DeadLift::End() {}
+void Flex::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DeadLift::Interrupted() {}
+void Flex::Interrupted() {}
