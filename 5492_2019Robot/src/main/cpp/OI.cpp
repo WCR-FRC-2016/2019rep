@@ -70,7 +70,7 @@ bool* OI::ReturnLightSensors() {
 }
 
 bool OI::ReturnManualAButton() {
-	return _manualStick->GetAButton();
+	return _manualStick->GetAButtonPressed();
 }
 bool OI::ReturnManualXButton(){
 	return _manualStick->GetXButton();

@@ -11,6 +11,7 @@
 #include "Robot.h"
 #include "RobotMap.h"
 #include "ctre/Phoenix.h"
+#include "commands/CargoClawCommand.h"
 
 WPI_TalonSRX* CargoClawMotor;
 double ClawValue = 0;
@@ -22,16 +23,20 @@ CargoClaw::CargoClaw() : Subsystem("CargoClaw") {}
 void CargoClaw::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
+    if (!Initialized) {
+		CargoClaw::InitCargoClaw();
+	}
+	Robot::m_cargoclaw.SetDefaultCommand(new CargoClawCommand());
 }
 void CargoClaw::InitCargoClaw(){
   OpenOneMotor* OpenCargoClaw = new OpenOneMotor();
   CargoClawMotor = OpenCargoClaw->Open(cargoClaw);
   CargoClawMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,0,0);
-
+  Initialized = true;
 }
 void CargoClaw::CollectCargo(bool AButton){
   LimitSwitch = CargoClawMotor->GetSensorCollection().IsFwdLimitSwitchClosed();
-  if ( AButton && (LimitSwitch == 1)){
+  if ( AButton && (LimitSwitch == 0)){
     if (ClawValue == 0){
       ClawValue = ForwardClaw;
     }
@@ -46,6 +51,9 @@ void CargoClaw::CollectCargo(bool AButton){
     else{
       ClawValue = 0;
     }     
+  }
+  else if (LimitSwitch == 1) {
+    ClawValue = 0;
   }
   CargoClawMotor->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, ClawValue);
 }
