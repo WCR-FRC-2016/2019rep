@@ -55,13 +55,16 @@ double OI::ReturnManualLeftYAxis(){
 bool OI::ReturnDriverXButton() {
 	return _driverStick->GetXButton();
 }
+void OI::SwapLedMode(int mode)	{
+	//1 is off, 3 is on
+	table->PutNumber("ledMode",mode);
+}
 double* OI::ReturnVisionX(){
 	targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0); 
 	targetArea = table->GetNumber("ta",0.0);
 	visionData[0] = targetOffsetAngle_Horizontal;
 	visionData[1] = targetArea;
 	return visionData;
-  
 }
 bool* OI::ReturnLightSensors() {
 	lightData[0] = LightSensorZero->Get();

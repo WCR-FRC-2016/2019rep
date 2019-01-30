@@ -17,6 +17,9 @@
 #include "Robot.h"
 #include <ctre/Phoenix.h>
 #include <commands/TankDrive.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 WPI_TalonSRX * FrontL;
 WPI_TalonSRX * FrontR;
 WPI_TalonSRX * BackL; 
