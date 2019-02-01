@@ -37,6 +37,23 @@ const double LeftP = 0.073814156 ;
 const double LeftI = 7.3814156E-6;
 const double LeftD = 0;
 
+const double ArmP = 0;
+const double ArmI = 0;
+const double ArmD = 0;
+const double LiftP = 0;
+const double LiftI = 0;
+const double LiftD = 0;
+
+const double ArmP1 = 0;
+const double ArmP2 = 0;
+const double ArmP3 = 0;
+const double ArmP4 = 0;
+
+const double LiftP1 = 0;
+const double LiftP2 = 0;
+const double LiftP3 = 0;
+const double LiftP4 = 0;
+
 const double MaxOutput = 1;
 const double NominalOutput = .25;
 const double PIDDeadband = 0.011415692;

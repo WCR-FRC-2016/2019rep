@@ -28,11 +28,17 @@ void Bicep::BicepStretch(){
   OpenBicepMotor->Invert = true;
   ArmFollower = OpenBicepMotor->Open(arm2);
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
+  ArmLeader->Config_kP(0, ArmP, 0);
+  ArmLeader->Config_kI(0, ArmI, 0);
+  ArmLeader->Config_kD(0, ArmD, 0);
 }
 void Bicep::Rotato(double joystick) {
   ArmLeader->Set(joystick);
 }
 
+void Bicep::CtrlRotato(double SetPoint) {
+  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, SetPoint);
+}
 
 void Bicep::InitDefaultCommand() {
   if (!initialized)

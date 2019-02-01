@@ -20,4 +20,7 @@ class DoWeEvenLift : public frc::Subsystem {
   void LiftInit();
   void Lift(double joystick);
   void InitDefaultCommand() override;
+  void CtrlLift(double SetPoint);
 };
+
+

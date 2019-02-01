@@ -36,6 +36,11 @@ class OI {
 	std::shared_ptr<NetworkTable> table;
 	double* ReturnVisionX();
 	
+	bool ReturnManualAButton();
+	bool ReturnManualXButton();
+	bool ReturnManualYButton();
+	bool ReturnManualBButton();
+	
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;

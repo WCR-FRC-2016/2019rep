@@ -8,6 +8,7 @@
 #include "commands/Flex.h"
 #include "Robot.h"
 #include "OI.h"
+#include "RobotMap.h"
 
 Flex::Flex() {
   // Use Requires() here to declare subsystem dependencies
@@ -20,7 +21,27 @@ void Flex::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void Flex::Execute() {
-  Robot::m_bicep.Rotato(Robot::m_oi.ReturnManualRightYAxis());
+  
+  if(Robot::m_oi.ReturnManualXButton() || State==POS1) {
+    Robot::m_bicep.CtrlRotato(ArmP1);
+    State = POS1;
+  }
+    if(Robot::m_oi.ReturnManualYButton() || State==POS2) {
+    Robot::m_bicep.CtrlRotato(ArmP2);
+    State = POS2;
+  }
+    if(Robot::m_oi.ReturnManualBButton() || State==POS3) {
+    Robot::m_bicep.CtrlRotato(ArmP3);
+    State = POS3;
+  }
+    if(Robot::m_oi.ReturnManualAButton() || State==POS4) {
+    Robot::m_bicep.CtrlRotato(ArmP4);
+    State = POS4;
+  }
+    if((Robot::m_oi.ReturnManualRightYAxis() != 0) || State==Man) {
+    Robot::m_bicep.Rotato(Robot::m_oi.ReturnManualRightYAxis());
+    State = Man;
+  }
 }
 
 // Make this return true when this Command no longer needs to run execute()

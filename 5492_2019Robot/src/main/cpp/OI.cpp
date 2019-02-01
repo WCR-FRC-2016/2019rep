@@ -70,5 +70,18 @@ bool* OI::ReturnLightSensors() {
 	lightData[1] = LightSensorOne->Get();
 	return lightData;
 }
+bool OI::ReturnManualAButton() {
+	return _manualStick->GetAButtonPressed();
+}
+bool OI::ReturnManualBButton() {
+	return _manualStick->GetBButtonPressed();
+}
+bool OI::ReturnManualXButton() {
+	return _manualStick->GetXButtonPressed();
+}
+bool OI::ReturnManualYButton() {
+	return _manualStick->GetYButtonPressed();
+}
+
 
 

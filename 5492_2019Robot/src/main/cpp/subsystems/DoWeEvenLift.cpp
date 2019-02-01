@@ -29,6 +29,9 @@ void DoWeEvenLift::LiftInit() {
     OpenLiftMotor->Invert = true;
     LiftFollower = OpenLiftMotor->Open(lift2);
     LiftFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, lift1);
+    LiftLeader->Config_kP(0, LiftP, 0);
+    LiftLeader->Config_kI(0, LiftI, 0);
+    LiftLeader->Config_kD(0, LiftD, 0);
 }
 void DoWeEvenLift::Lift(double joystick){
   if (joystick > 0){
@@ -48,6 +51,10 @@ void DoWeEvenLift::InitDefaultCommand() {
     Robot::m_doweevenlift.SetDefaultCommand(new DeadLift() );
 
 
+}
+
+void DoWeEvenLift::CtrlLift(double SetPoint) {
+  LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, SetPoint);  
 }
 
 // Put methods for controlling this subsystem

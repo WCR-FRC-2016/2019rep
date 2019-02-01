@@ -19,4 +19,5 @@ class Bicep : public frc::Subsystem {
   void BicepStretch();
   void Rotato(double joystick);
   void InitDefaultCommand() override;
+  void CtrlRotato(double SetPoint);
 };

@@ -17,4 +17,9 @@ class Flex : public frc::Command {
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+ private:
+  enum PositionState {
+    POS1, POS2, POS3, POS4, Man
+  };
+  PositionState State;
 };
