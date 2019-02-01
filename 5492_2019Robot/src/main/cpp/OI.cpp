@@ -38,6 +38,9 @@ double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
 }
+bool OI::ReturnManualRightBumper(){
+	return _manualStick->GetBumperPressed(frc::GenericHID::kRightHand);
+}
 double OI::ReturnDriverYAxis(){
 	return DeadBand(_driverStick->GetY(frc::GenericHID::kLeftHand));
 }

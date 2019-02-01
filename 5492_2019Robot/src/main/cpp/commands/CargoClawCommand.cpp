@@ -19,7 +19,7 @@ void CargoClawCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void CargoClawCommand::Execute() {
-  Robot::m_cargoclaw.CollectCargo(Robot::m_oi.ReturnManualAButton());
+  Robot::m_cargoclaw.CollectCargo(Robot::m_oi.ReturnManualRightBumper());
 }
 
 // Make this return true when this Command no longer needs to run execute()
