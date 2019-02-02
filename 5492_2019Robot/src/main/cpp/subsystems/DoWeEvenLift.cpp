@@ -32,6 +32,7 @@ void DoWeEvenLift::LiftInit() {
     LiftLeader->Config_kP(0, LiftP, 0);
     LiftLeader->Config_kI(0, LiftI, 0);
     LiftLeader->Config_kD(0, LiftD, 0);
+    LiftLeader->ConfigSelectedFeedbackSensor(ctre::phoenix::motorcontrol::CTRE_MagEncoder_Relative,0,0);
 }
 void DoWeEvenLift::Lift(double joystick){
   if (joystick > 0){

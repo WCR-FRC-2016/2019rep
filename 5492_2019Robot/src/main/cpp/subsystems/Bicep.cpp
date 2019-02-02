@@ -31,6 +31,7 @@ void Bicep::BicepStretch(){
   ArmLeader->Config_kP(0, ArmP, 0);
   ArmLeader->Config_kI(0, ArmI, 0);
   ArmLeader->Config_kD(0, ArmD, 0);
+  ArmLeader->ConfigSelectedFeedbackSensor(ctre::phoenix::motorcontrol::CTRE_MagEncoder_Relative,0,0);
 }
 void Bicep::Rotato(double joystick) {
   ArmLeader->Set(joystick);
