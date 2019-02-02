@@ -13,10 +13,12 @@ class DriveBase : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
   bool initialized = false;
+  double driveConstant = 1;
  public:
   DriveBase();
   void DriveBaseInit();
   void InitDefaultCommand() override;
   void ArcadeDrive(double xAxis, double yAxis);
   void RampSwitch(bool rampOn);
+  void reverseDrive(bool bButton);
 };

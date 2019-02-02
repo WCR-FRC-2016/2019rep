@@ -34,6 +34,9 @@ void OI::OIInit(){
 	LightSensorZero = new frc::DigitalInput(0);
 	LightSensorOne = new frc::DigitalInput(1);
 }
+bool OI::ReturnDriverBButton() {
+	return _driverStick->GetBButtonPressed();
+}
 double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
@@ -55,6 +58,7 @@ double OI::ReturnManualLeftYAxis(){
 bool OI::ReturnDriverXButton() {
 	return _driverStick->GetXButton();
 }
+
 void OI::SwapLedMode(int mode)	{
 	//1 is off, 3 is on
 	table->PutNumber("ledMode",mode);
