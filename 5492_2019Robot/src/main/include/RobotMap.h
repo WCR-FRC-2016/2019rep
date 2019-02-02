@@ -23,7 +23,7 @@ const int climb2 = 3;
 const int elevator1 = 4;
 const int elevator2 = 5;
 //Pneumatics
-const int pneuamticValve1 = 7;
+const int harpoon = 7;
 const int pneumaticValve2 = 8;
 
 const double RightP = 0.0678;

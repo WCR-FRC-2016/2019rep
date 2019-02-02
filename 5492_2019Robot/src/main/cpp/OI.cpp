@@ -52,6 +52,15 @@ double OI::DeadBand(double joystick) {
 double OI::ReturnManualLeftYAxis(){
 	return DeadBand(_manualStick->GetY(frc::GenericHID::kLeftHand));
 }
+
+double OI::ReturnManualLeftTrigger(){
+	return DeadBand(_manualStick->GetTrigger(frc::GenericHID::kLeftHand));
+}
+
+double OI::ReturnManualLeftBump(){
+	return DeadBand(_manualStick->GetBumper(frc::GenericHID::kLeftHand));
+}
+
 bool OI::ReturnDriverXButton() {
 	return _driverStick->GetXButton();
 }
