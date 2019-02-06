@@ -30,7 +30,7 @@ void Bicep::BicepStretch(){
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
 }
 void Bicep::Rotato(double joystick) {
-  ArmLeader->Set(joystick);
+  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick);
 }
 
 

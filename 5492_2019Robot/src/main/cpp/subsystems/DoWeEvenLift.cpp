@@ -37,7 +37,7 @@ void DoWeEvenLift::Lift(double joystick){
   else {
     joystick = joystick / 1.5;
   }
-  LiftLeader->Set(joystick);
+  LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, joystick);
 }
 void DoWeEvenLift::InitDefaultCommand() {
   // Set the default command for a subsystem here.
