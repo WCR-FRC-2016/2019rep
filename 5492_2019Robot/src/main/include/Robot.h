@@ -20,13 +20,14 @@
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
+#include "subsystems/HatchHarpoon.h"
 
 class Robot : public frc::TimedRobot {
  public:
   static ExampleSubsystem m_subsystem;
   static OI m_oi;
   static DriveBase m_drivebase;
-  
+  static HatchHarpoon m_hatchharpoon; 
   void RobotInit() override;
   void RobotPeriodic() override;
   void DisabledInit() override;

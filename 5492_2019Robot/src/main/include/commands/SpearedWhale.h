@@ -7,23 +7,14 @@
 
 #pragma once
 
-#include <frc/commands/Subsystem.h>
+#include <frc/commands/Command.h>
 
-class HatchHarpoon : public frc::Subsystem {
- private:
-  int initialized;
-
+class SpearedWhale : public frc::Command {
  public:
-  HatchHarpoon();
-  void InitDefaultCommand() override;
-  void HatchHarpoonInit();
-  int FreeWilly();
-  void HarpoonLauncher();
-  enum PositionState {
-    CLOSED, MID, OPEN, GotoClosed, GotoMid, GotoOpen
-  };
-  int CurrentState;
-  double ForwardMotor = 0.5;
-  double BackwardMotor = -0.5;
-  double CurrentMotor = 0;
+  SpearedWhale();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

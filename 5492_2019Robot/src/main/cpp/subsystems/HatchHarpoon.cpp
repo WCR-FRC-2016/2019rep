@@ -19,14 +19,15 @@
 #include "Robot.h"
 #include <ctre/Phoenix.h>
 #include "OpenOneMotor.h"
+#include "commands/SpearedWhale.h"
 WPI_TalonSRX* HatchHarpoonMotor;
 
 HatchHarpoon::HatchHarpoon() : Subsystem("ExampleSubsystem") {}
-
 void HatchHarpoon::HatchHarpoonInit() {
   initialized = true;
   OpenOneMotor* OpenHatchHarpoonMotor = new OpenOneMotor();
   HatchHarpoonMotor = OpenHatchHarpoonMotor-> Open(harpoon);
+  CurrentState = FreeWilly();
 }
 
 int HatchHarpoon::FreeWilly(){
@@ -39,46 +40,91 @@ int HatchHarpoon::FreeWilly(){
   }else if (!ForwardLimit && BackwardLimit){
     return OPEN;
   }
+    else {
+      CurrentState = OPEN;
+    }
 }
 
 void HatchHarpoon::HarpoonLauncher(){
-  switch(FreeWilly()){
+  switch(CurrentState){
     case OPEN:
     {
-      if (ReturnManualLeftBump){
-        return MID;
+      if (Robot::m_oi.ReturnManualLeftBump()){
+        CurrentMotor = BackwardMotor;
+        CurrentState = GotoMid;
       }
-      if (ReturnManualLeftTrigger){
-        return CLOSED;
+      else if (Robot::m_oi.ReturnManualLeftTrigger()){
+        CurrentMotor = BackwardMotor;
+        CurrentState = GotoClosed;
+      }
+      else 
+      {
+        CurrentMotor = 0;
       }
     }
     break;
     case MID:
     {
-      if (ReturnManualLeftBump){
-        return OPEN;
+      if (Robot::m_oi.ReturnManualLeftBump()){
+        CurrentMotor = ForwardMotor;
+        CurrentState = GotoOpen;
       }
-      if (ReturnManualLeftTrigger){
-        return CLOSED;
+      if (Robot::m_oi.ReturnManualLeftTrigger()){
+        CurrentMotor = BackwardMotor;
+        CurrentState = GotoClosed;
+      }
+      else 
+      {
+        CurrentMotor = 0;
       }
     }
     break;
     case CLOSED:
     {
-      if (ReturnManualLeftBump){
-        return MID;
+      if (Robot::m_oi.ReturnManualLeftBump()){
+        CurrentMotor = ForwardMotor;
+        CurrentState = GotoMid;
+      }
+      else 
+      {
+        CurrentMotor = 0;
+      }
+    }
+    break;
+  
+    case GotoOpen:
+    {
+      if (FreeWilly()==OPEN){
+        CurrentState = OPEN;
+        CurrentMotor = 0;
+      }
+    }
+    break;
+    case GotoMid:
+    {
+      if (FreeWilly()==MID){
+        CurrentState = MID;
+        CurrentMotor = 0;
+      }
+    }
+    break;
+    case GotoClosed: 
+    {
+      if (FreeWilly()==CLOSED){
+        CurrentState = CLOSED;
+        CurrentMotor = 0;
       }
     }
     break;
   }
+  HatchHarpoonMotor->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, CurrentMotor);
 }
 
 void HatchHarpoon::InitDefaultCommand() {
   if (!initialized) {
-		HatchHarpoon::HatchHarpoonInit();
+    Robot::m_hatchharpoon.HatchHarpoonInit();
 	}
-	
-  //Robot::m_drivebase.SetDefaultCommand(new TankDrive());
+  Robot::m_hatchharpoon.SetDefaultCommand(new SpearedWhale()); 
 }
 
 // Put methods for controlling this subsystem
