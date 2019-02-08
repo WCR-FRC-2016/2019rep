@@ -6,19 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+
 #include <frc/commands/Subsystem.h>
 
-class DriveBase : public frc::Subsystem {
+class Bicep : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
   bool initialized = false;
-  double driveConstant = 1;
  public:
-  DriveBase();
-  void DriveBaseInit();
+  Bicep();
+  void BicepStretch();
+  void Rotato(double joystick);
   void InitDefaultCommand() override;
-  void ArcadeDrive(double xAxis, double yAxis);
-  void RampSwitch(bool rampOn);
-  void reverseDrive(bool bButton);
 };

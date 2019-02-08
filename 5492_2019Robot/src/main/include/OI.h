@@ -16,15 +16,23 @@ class OI {
   OI(); 
 	double ReturnDriverXAxis();
 	double ReturnDriverYAxis();
+
+	double ReturnManualLeftYAxis();
+	double ReturnManualRightYAxis();
+
 	void OIInit();
 	double DeadBand(double joystick);
-	double ReturnManualLeftYAxis();
+
 	bool ReturnDriverXButton();
 	double visionData[2] = {0.0,0.0};
 	bool* ReturnLightSensors();
 	bool lightData[2] = {false,false}; 
+	bool ReturnManualXButton();
+	bool ReturnCargoClawLimitSwitch();
 	
+	bool ReturnDriverBButton();
 	void SwapLedMode(int mode);
+
 	double targetOffsetAngle_Horizontal;
  	 double targetOffsetAngle_Vertical;
  	 double targetArea;
@@ -34,6 +42,8 @@ class OI {
 	double* ReturnVisionX();
 	bool ReturnManualLeftBump();
 	bool ReturnManualLeftTrigger();
+	bool ReturnManualAButton();
+	bool ReturnManualRightBumper();
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;

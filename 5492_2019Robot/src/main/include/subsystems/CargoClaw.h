@@ -6,19 +6,18 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include <frc/commands/Subsystem.h>
 
-class DriveBase : public frc::Subsystem {
+#include <Commands/Subsystem.h>
+
+class CargoClaw : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  bool initialized = false;
-  double driveConstant = 1;
+  bool Initialized = false;
+
  public:
-  DriveBase();
-  void DriveBaseInit();
+  CargoClaw();
   void InitDefaultCommand() override;
-  void ArcadeDrive(double xAxis, double yAxis);
-  void RampSwitch(bool rampOn);
-  void reverseDrive(bool bButton);
+  void InitCargoClaw();
+  void CollectCargo(bool AButton);
 };

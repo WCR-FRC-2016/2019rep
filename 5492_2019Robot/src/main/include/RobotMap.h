@@ -12,19 +12,23 @@ const int frontLeftDrive = 14; //encoder
 const int frontRightDrive = 1; //encoder
 const int backLeftDrive = 15;
 const int backRightDrive = 0;
+
 const int RampTime = .3;
 //Collector
-const int leftCollector = 10;
+const int cargoClaw = 10;
 const int rightCollector = 11;
 //Climb
 const int climb1 = 2;
 const int climb2 = 3;
 //Elevator
-const int elevator1 = 4;
-const int elevator2 = 5;
+const int lift1 = 4;
+const int lift2 = 5;
 //Pneumatics
 const int harpoon = 7;
 const int pneumaticValve2 = 8;
+//Arm
+const int arm1 = 12;
+const int arm2 = 13;
 
 const double RightP = 0.0678;
 const double RightI = 6.78E-6;

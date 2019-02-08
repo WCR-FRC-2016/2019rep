@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
-
 #include <frc/WPILib.h>
 #include <frc/Joystick.h>
 #include <frc/GenericHID.h>
@@ -34,9 +33,15 @@ void OI::OIInit(){
 	LightSensorZero = new frc::DigitalInput(0);
 	LightSensorOne = new frc::DigitalInput(1);
 }
+bool OI::ReturnDriverBButton() {
+	return _driverStick->GetBButtonPressed();
+}
 double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
+}
+bool OI::ReturnManualRightBumper(){
+	return _manualStick->GetBumperPressed(frc::GenericHID::kRightHand);
 }
 double OI::ReturnDriverYAxis(){
 	return DeadBand(_driverStick->GetY(frc::GenericHID::kLeftHand));
@@ -48,7 +53,9 @@ double OI::DeadBand(double joystick) {
 	}
 		return joystick;
 }
-
+bool OI::ReturnDriverXButton() {
+	return _driverStick->GetXButton();
+}
 double OI::ReturnManualLeftYAxis(){
 	return DeadBand(_manualStick->GetY(frc::GenericHID::kLeftHand));
 }
@@ -64,10 +71,16 @@ bool OI::ReturnManualLeftBump(){
 bool OI::ReturnDriverXButton() {
 	return _driverStick->GetXButton();
 }
+double OI::ReturnManualRightYAxis(){
+	return DeadBand(_manualStick->GetY(frc::GenericHID::kRightHand));
+}
+
+
 void OI::SwapLedMode(int mode)	{
 	//1 is off, 3 is on
 	table->PutNumber("ledMode",mode);
 }
+
 double* OI::ReturnVisionX(){
 	targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0); 
 	targetArea = table->GetNumber("ta",0.0);
@@ -79,6 +92,13 @@ bool* OI::ReturnLightSensors() {
 	lightData[0] = LightSensorZero->Get();
 	lightData[1] = LightSensorOne->Get();
 	return lightData;
+}
+
+bool OI::ReturnManualAButton() {
+	return _manualStick->GetAButtonPressed();
+}
+bool OI::ReturnManualXButton(){
+	return _manualStick->GetXButton();
 }
 
 
