@@ -40,6 +40,8 @@ class OI {
 	nt::NetworkTableEntry ledmode;
 	std::shared_ptr<NetworkTable> table;
 	double* ReturnVisionX();
+	bool ReturnManualLeftBump();
+	bool ReturnManualLeftTrigger();
 	bool ReturnManualAButton();
 	bool ReturnManualRightBumper();
  private:

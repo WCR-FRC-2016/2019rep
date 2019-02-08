@@ -59,6 +59,18 @@ bool OI::ReturnDriverXButton() {
 double OI::ReturnManualLeftYAxis(){
 	return DeadBand(_manualStick->GetY(frc::GenericHID::kLeftHand));
 }
+
+bool OI::ReturnManualLeftTrigger(){
+	return (DeadBand(_manualStick->GetTriggerAxis(frc::GenericHID::kLeftHand)) > 0.5);
+}
+
+bool OI::ReturnManualLeftBump(){
+	return _manualStick->GetBumperPressed(frc::GenericHID::kLeftHand);
+}
+
+bool OI::ReturnDriverXButton() {
+	return _driverStick->GetXButton();
+}
 double OI::ReturnManualRightYAxis(){
 	return DeadBand(_manualStick->GetY(frc::GenericHID::kRightHand));
 }

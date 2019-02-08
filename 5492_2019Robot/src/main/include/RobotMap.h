@@ -24,7 +24,7 @@ const int climb2 = 3;
 const int lift1 = 4;
 const int lift2 = 5;
 //Pneumatics
-const int pneuamticValve1 = 7;
+const int harpoon = 7;
 const int pneumaticValve2 = 8;
 //Arm
 const int arm1 = 12;

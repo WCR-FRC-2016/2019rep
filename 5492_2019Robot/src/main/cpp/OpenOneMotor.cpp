@@ -18,6 +18,6 @@ WPI_TalonSRX * OpenOneMotor::Open (int DeviceNumber) {
 	ReturnTalonObj->ConfigPeakCurrentDuration(1000,0);
 	ReturnTalonObj->ConfigOpenloopRamp(RampTime, 0);
 	ReturnTalonObj->EnableCurrentLimit(CurrentLimit);
-	ReturnTalonObj->SetSafetyEnabled(true);
+	ReturnTalonObj->SetSafetyEnabled(false);
 	return ReturnTalonObj;
 }
