@@ -16,6 +16,8 @@
 #include "commands/MyAutoCommand.h"
 #include "subsystems/ExampleSubsystem.h"
 #include "subsystems/DriveBase.h"
+#include "subsystems/DoWeEvenLift.h"
+#include "subsystems/Bicep.h"
 
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
@@ -26,6 +28,8 @@ class Robot : public frc::TimedRobot {
   static ExampleSubsystem m_subsystem;
   static OI m_oi;
   static DriveBase m_drivebase;
+  static DoWeEvenLift m_doweevenlift;
+  static Bicep m_bicep;
   
   void RobotInit() override;
   void RobotPeriodic() override;

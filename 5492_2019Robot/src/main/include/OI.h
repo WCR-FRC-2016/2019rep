@@ -16,9 +16,13 @@ class OI {
   OI(); 
 	double ReturnDriverXAxis();
 	double ReturnDriverYAxis();
+
+	double ReturnManualLeftYAxis();
+	double ReturnManualRightYAxis();
+
 	void OIInit();
 	double DeadBand(double joystick);
-	double ReturnManualLeftYAxis();
+
 	bool ReturnDriverXButton();
 	double visionData[2] = {0.0,0.0};
 	bool* ReturnLightSensors();

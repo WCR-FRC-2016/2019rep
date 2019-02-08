@@ -15,11 +15,13 @@
 #include <frc/WPILib.h>
 #include <ctre/Phoenix.h>
 #include <subsystems/DriveBase.h>
+#include <subsystems/DoWeEvenLift.h>
 
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
 DriveBase Robot::m_drivebase;
-
+DoWeEvenLift Robot::m_doweevenlift;
+Bicep Robot::m_bicep;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
