@@ -28,10 +28,12 @@ class OI {
 	bool* ReturnLightSensors();
 	bool lightData[2] = {false,false}; 
 	
+	bool ReturnDriverBButton();
+	void SwapLedMode(int mode);
 	double targetOffsetAngle_Horizontal;
-  double targetOffsetAngle_Vertical;
-  double targetArea;
-  double targetSkew;
+ 	 double targetOffsetAngle_Vertical;
+ 	 double targetArea;
+  	double targetSkew;
 	nt::NetworkTableEntry ledmode;
 	std::shared_ptr<NetworkTable> table;
 	double* ReturnVisionX();
