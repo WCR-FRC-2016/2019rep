@@ -27,9 +27,12 @@ class OI {
 	double visionData[2] = {0.0,0.0};
 	bool* ReturnLightSensors();
 	bool lightData[2] = {false,false}; 
+	bool ReturnManualXButton();
+	bool ReturnCargoClawLimitSwitch();
 	
 	bool ReturnDriverBButton();
 	void SwapLedMode(int mode);
+
 	double targetOffsetAngle_Horizontal;
  	 double targetOffsetAngle_Vertical;
  	 double targetArea;
@@ -37,7 +40,8 @@ class OI {
 	nt::NetworkTableEntry ledmode;
 	std::shared_ptr<NetworkTable> table;
 	double* ReturnVisionX();
-	
+	bool ReturnManualAButton();
+	bool ReturnManualRightBumper();
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;

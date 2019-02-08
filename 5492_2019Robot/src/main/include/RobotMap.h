@@ -15,7 +15,7 @@ const int backRightDrive = 0;
 
 const int RampTime = .3;
 //Collector
-const int leftCollector = 10;
+const int cargoClaw = 10;
 const int rightCollector = 11;
 //Climb
 const int climb1 = 2;

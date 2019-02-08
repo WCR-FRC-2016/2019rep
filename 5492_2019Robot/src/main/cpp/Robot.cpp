@@ -20,6 +20,7 @@
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
 DriveBase Robot::m_drivebase;
+CargoClaw Robot::m_cargoclaw;
 DoWeEvenLift Robot::m_doweevenlift;
 Bicep Robot::m_bicep;
 

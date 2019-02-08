@@ -40,6 +40,9 @@ double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
 }
+bool OI::ReturnManualRightBumper(){
+	return _manualStick->GetBumperPressed(frc::GenericHID::kRightHand);
+}
 double OI::ReturnDriverYAxis(){
 	return DeadBand(_driverStick->GetY(frc::GenericHID::kLeftHand));
 }
@@ -77,6 +80,13 @@ bool* OI::ReturnLightSensors() {
 	lightData[0] = LightSensorZero->Get();
 	lightData[1] = LightSensorOne->Get();
 	return lightData;
+}
+
+bool OI::ReturnManualAButton() {
+	return _manualStick->GetAButtonPressed();
+}
+bool OI::ReturnManualXButton(){
+	return _manualStick->GetXButton();
 }
 
 
