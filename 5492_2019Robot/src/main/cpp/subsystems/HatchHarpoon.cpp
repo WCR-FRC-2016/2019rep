@@ -27,25 +27,31 @@ void HatchHarpoon::HatchHarpoonInit() {
   initialized = true;
   OpenOneMotor* OpenHatchHarpoonMotor = new OpenOneMotor();
   HatchHarpoonMotor = OpenHatchHarpoonMotor-> Open(harpoon);
+  HatchHarpoonMotor->ConfigForwardLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_Disabled,0);
+  HatchHarpoonMotor->ConfigReverseLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_Disabled,0);
   CurrentState = FreeWilly();
 }
 
 int HatchHarpoon::FreeWilly(){
-  bool ForwardLimit = HatchHarpoonMotor->GetSensorCollection().IsFwdLimitSwitchClosed();
-  bool BackwardLimit = HatchHarpoonMotor->GetSensorCollection().IsRevLimitSwitchClosed();
-  if (ForwardLimit && ! BackwardLimit){
+  int ForwardLimit = HatchHarpoonMotor->GetSensorCollection().IsFwdLimitSwitchClosed();
+  int BackwardLimit = HatchHarpoonMotor->GetSensorCollection().IsRevLimitSwitchClosed();
+  //printf("ForwardLimit=%i",ForwardLimit," BackwardLimit=%i\n", BackwardLimit);
+  if (ForwardLimit==1 && BackwardLimit==0){
     return CLOSED;
-  }else if (ForwardLimit && BackwardLimit){
+  }
+  else if (ForwardLimit==1 && BackwardLimit==1){
     return MID;
-  }else if (!ForwardLimit && BackwardLimit){
+  }
+  else if (ForwardLimit==0 && BackwardLimit==1){
     return OPEN;
   }
-    else {
-      CurrentState = OPEN;
-    }
+  else {
+    return OPEN;
+  }
 }
 
 void HatchHarpoon::HarpoonLauncher(){
+  //printf("Current state is %i\n",CurrentState);
   switch(CurrentState){
     case OPEN:
     {
@@ -64,12 +70,11 @@ void HatchHarpoon::HarpoonLauncher(){
     }
     break;
     case MID:
-    {
       if (Robot::m_oi.ReturnManualLeftBump()){
         CurrentMotor = ForwardMotor;
         CurrentState = GotoOpen;
       }
-      if (Robot::m_oi.ReturnManualLeftTrigger()){
+      else if (Robot::m_oi.ReturnManualLeftTrigger()){
         CurrentMotor = BackwardMotor;
         CurrentState = GotoClosed;
       }
@@ -77,10 +82,8 @@ void HatchHarpoon::HarpoonLauncher(){
       {
         CurrentMotor = 0;
       }
-    }
     break;
     case CLOSED:
-    {
       if (Robot::m_oi.ReturnManualLeftBump()){
         CurrentMotor = ForwardMotor;
         CurrentState = GotoMid;
@@ -89,32 +92,25 @@ void HatchHarpoon::HarpoonLauncher(){
       {
         CurrentMotor = 0;
       }
-    }
     break;
   
     case GotoOpen:
-    {
       if (FreeWilly()==OPEN){
         CurrentState = OPEN;
         CurrentMotor = 0;
       }
-    }
     break;
     case GotoMid:
-    {
       if (FreeWilly()==MID){
         CurrentState = MID;
         CurrentMotor = 0;
       }
-    }
     break;
     case GotoClosed: 
-    {
       if (FreeWilly()==CLOSED){
         CurrentState = CLOSED;
         CurrentMotor = 0;
       }
-    }
     break;
   }
   HatchHarpoonMotor->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, CurrentMotor);
