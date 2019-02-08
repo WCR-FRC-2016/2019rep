@@ -17,16 +17,21 @@
 #include "Robot.h"
 #include <ctre/Phoenix.h>
 #include <commands/TankDrive.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableEntry.h>
+#include <networktables/NetworkTableInstance.h>
 WPI_TalonSRX * FrontL;
 WPI_TalonSRX * FrontR;
 WPI_TalonSRX * BackL; 
 WPI_TalonSRX * BackR;
 frc::DifferentialDrive * _diffDrive;
-DriveBase::DriveBase() : Subsystem("DriveBase") {}
+DriveBase::DriveBase() : Subsystem("DriveBase") {
+
+}
 
 void DriveBase::DriveBaseInit() {
 initialized = true;
-	FrontL = new WPI_TalonSRX (frontLeftDrive);
+		FrontL = new WPI_TalonSRX (frontLeftDrive);
 		FrontR = new WPI_TalonSRX (frontRightDrive);
 		BackL = new WPI_TalonSRX (backLeftDrive);
 		BackR = new WPI_TalonSRX (backRightDrive);
@@ -103,6 +108,8 @@ initialized = true;
 		BackL->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, frontLeftDrive);
 		BackR->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, frontRightDrive);
 		printf("Done setting up motor \n");
+
+		
 }
 void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
   	double parsedLeft;
@@ -111,9 +118,10 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 	double parsedY;
 	double power = 2.3;
 	//Setting inputs to a power
+	
 	parsedX = pow((xAxis>0)?xAxis:-xAxis, power) * (xAxis / (xAxis>0)?xAxis:-xAxis);
 
-	parsedY = pow((yAxis>0)?yAxis:-yAxis, power) * (yAxis / (yAxis>0)?yAxis:-yAxis);
+	parsedY = pow((yAxis>0)?yAxis:-yAxis, power) * (yAxis / (yAxis>0)?yAxis:-yAxis) * driveConstant;
 
 	if (yAxis < 0) // forward
 	{
@@ -150,5 +158,10 @@ void DriveBase::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
 }
 
+void DriveBase::reverseDrive (bool bButton) {
+if (bButton) {
+	driveConstant = driveConstant * -1;
+}
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
