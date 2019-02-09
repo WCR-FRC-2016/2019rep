@@ -15,16 +15,15 @@ const int backRightDrive = 0;
 
 const int RampTime = .3;
 //Collector
-const int cargoClaw = 10;
-const int rightCollector = 11;
+const int cargoClaw = 5;
 //Climb
-const int climb1 = 2;
-const int climb2 = 3;
+const int climb1 = 4;
+const int climb2 = 5;
 //Elevator
-const int lift1 = 4;
-const int lift2 = 5;
+const int lift1 = 2;
+const int lift2 = 3;
 //Pneumatics
-const int harpoon = 7;
+const int harpoon = 4;
 const int pneumaticValve2 = 8;
 //Arm
 const int arm1 = 12;
