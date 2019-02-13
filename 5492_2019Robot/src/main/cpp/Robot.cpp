@@ -19,6 +19,8 @@
 #include "subsystems/HatchHarpoon.h"
 
 #include <subsystems/DoWeEvenLift.h>
+#include <cscore_oo.h>
+
 
 
 ExampleSubsystem Robot::m_subsystem;
@@ -35,8 +37,10 @@ void Robot::RobotInit() {
   m_chooser.AddOption("My Auto", &m_myAuto);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   m_oi.OIInit();
-  //frc::CameraServer::GetInstance()->StartAutomaticCapture();
-
+  //frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+  cs::UsbCamera camera = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+  camera.SetVideoMode(cs::VideoMode::kYUYV, 640, 360, 30);
+ 
 }
 
 /**
@@ -103,7 +107,9 @@ void Robot::TeleopInit() {
   }
 }
 
-void Robot::TeleopPeriodic() { frc::Scheduler::GetInstance()->Run(); }
+void Robot::TeleopPeriodic() { frc::Scheduler::GetInstance()->Run(); 
+
+}
 
 void Robot::TestPeriodic() {}
 
