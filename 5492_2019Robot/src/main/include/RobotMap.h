@@ -24,6 +24,14 @@ const int lift1 = 2;
 const int lift2 = 3;
 //Pneumatics
 const int harpoon = 4;
+const int harpoonOpen = 0;
+const int harpoonMid = 0;
+const int harpoonClosed = 0;
+
+const int harpoonP = 0;
+const int harpoonI = 0;
+const int harpoonD = 0;
+
 const int pneumaticValve2 = 8;
 //Arm
 const int arm1 = 12;

@@ -23,7 +23,5 @@ class HatchHarpoon : public frc::Subsystem {
     CLOSED, MID, OPEN, GotoClosed, GotoMid, GotoOpen
   };
   int CurrentState;
-  double ForwardMotor = 0.5;
-  double BackwardMotor = -0.5;
-  double CurrentMotor = 0;
+  double CurrentPosition = 0;
 };

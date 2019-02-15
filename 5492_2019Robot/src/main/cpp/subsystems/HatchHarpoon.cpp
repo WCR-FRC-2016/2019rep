@@ -29,20 +29,30 @@ void HatchHarpoon::HatchHarpoonInit() {
   HatchHarpoonMotor = OpenHatchHarpoonMotor-> Open(harpoon);
   HatchHarpoonMotor->ConfigForwardLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_Disabled,0);
   HatchHarpoonMotor->ConfigReverseLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_Disabled,0);
+  
+  
+  HatchHarpoonMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
+   HatchHarpoonMotor->SetSelectedSensorPosition(0, 1, 50); // Zero
+  HatchHarpoonMotor->SetStatusFramePeriod(StatusFrame::Status_1_General_, 5, 0); //Talon sends new status frame every 5 ms
+  HatchHarpoonMotor->SetSensorPhase(false);
+
+  // PID
+  HatchHarpoonMotor->Config_kP(1, harpoonP, 0);
+  HatchHarpoonMotor->Config_kI(1, harpoonI, 0);
+  HatchHarpoonMotor->Config_kD(1, harpoonD, 0);
   CurrentState = FreeWilly();
 }
 
 int HatchHarpoon::FreeWilly(){
-  int ForwardLimit = HatchHarpoonMotor->GetSensorCollection().IsFwdLimitSwitchClosed();
-  int BackwardLimit = HatchHarpoonMotor->GetSensorCollection().IsRevLimitSwitchClosed();
+  int startPosition = HatchHarpoonMotor->GetSelectedSensorPosition(0);
   //printf("ForwardLimit=%i",ForwardLimit," BackwardLimit=%i\n", BackwardLimit);
-  if (ForwardLimit==1 && BackwardLimit==0){
+  if (startPosition == harpoonClosed){
     return CLOSED;
   }
-  else if (ForwardLimit==1 && BackwardLimit==1){
+  else if (startPosition == harpoonMid){
     return MID;
   }
-  else if (ForwardLimit==0 && BackwardLimit==1){
+  else if (startPosition == harpoonOpen){
     return OPEN;
   }
   else {
@@ -56,64 +66,65 @@ void HatchHarpoon::HarpoonLauncher(){
     case OPEN:
     {
       if (Robot::m_oi.ReturnManualLeftBump()){
-        CurrentMotor = BackwardMotor;
+        CurrentPosition = harpoonMid;
         CurrentState = GotoMid;
       }
       else if (Robot::m_oi.ReturnManualLeftTrigger()){
-        CurrentMotor = BackwardMotor;
+        CurrentPosition = harpoonClosed;
         CurrentState = GotoClosed;
       }
       else 
       {
-        CurrentMotor = 0;
+        CurrentPosition = CurrentPosition;
       }
     }
     break;
     case MID:
       if (Robot::m_oi.ReturnManualLeftBump()){
-        CurrentMotor = ForwardMotor;
+        CurrentPosition = harpoonOpen;
         CurrentState = GotoOpen;
       }
       else if (Robot::m_oi.ReturnManualLeftTrigger()){
-        CurrentMotor = BackwardMotor;
+        CurrentPosition = harpoonClosed;
         CurrentState = GotoClosed;
       }
       else 
       {
-        CurrentMotor = 0;
+        CurrentPosition = CurrentPosition;
       }
     break;
     case CLOSED:
       if (Robot::m_oi.ReturnManualLeftBump()){
-        CurrentMotor = ForwardMotor;
+        CurrentPosition = harpoonMid;
         CurrentState = GotoMid;
       }
       else 
       {
-        CurrentMotor = 0;
+        CurrentPosition = CurrentPosition;
       }
     break;
   
     case GotoOpen:
       if (FreeWilly()==OPEN){
         CurrentState = OPEN;
-        CurrentMotor = 0;
+        CurrentPosition = CurrentPosition;
       }
     break;
     case GotoMid:
       if (FreeWilly()==MID){
         CurrentState = MID;
-        CurrentMotor = 0;
+        CurrentPosition = CurrentPosition;
       }
     break;
     case GotoClosed: 
       if (FreeWilly()==CLOSED){
         CurrentState = CLOSED;
-        CurrentMotor = 0;
+        CurrentPosition = CurrentPosition;
       }
     break;
   }
-  HatchHarpoonMotor->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, CurrentMotor);
+  HatchHarpoonMotor->Set(ctre::phoenix::motorcontrol::ControlMode::Position, CurrentPosition);
+ 
 }
 
 void HatchHarpoon::InitDefaultCommand() {
