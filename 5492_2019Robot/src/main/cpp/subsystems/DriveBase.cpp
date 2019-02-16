@@ -124,20 +124,20 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 	double minValue = 0;
 	double driverSlope = (1-minValue)/(1);
 	//Setting inputs to a power
-/*
+
 	if (xAxis > 0) {
-		parsedX = driverSlope + minX;
+		xAxis = driverSlope * xAxis + minX;
 	}
-	else {
-		parsedX = driverSlope - minX;
+	else if (xAxis<0) {
+		xAxis = driverSlope * xAxis - minX;
 	}
 	if (yAxis > 0) {
-		parsedY = driverSlope + minY;
+		yAxis = driverSlope * yAxis + minY;
 	} 
-	else {
-		parsedY = driverSlope - minY;
+	else if (yAxis<0) {
+		yAxis = driverSlope * yAxis - minY;
 	}
- */ 
+ 
 
 
 	parsedX = pow((xAxis>0)?xAxis:-xAxis, power) * (xAxis / (xAxis>0)?xAxis:-xAxis);
