@@ -138,7 +138,7 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 		  /	|
 		 /	|
 	*/ 
-	//XAxis setup to have a maximum value when the Yaxis is 0 and a minimum value when the Y axis is 1. 
+	//XAxis scaled to have a maximum value of 1 when the Yaxis is 0 and a minimum value of minX when the Y axis is 1. 
 
 	/*	XSC
 		|
@@ -175,7 +175,7 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 
 	parsedY = pow((yAxis>0)?yAxis:-yAxis, power) * (yAxis / (yAxis>0)?yAxis:-yAxis) * driveConstant;
 
-	if (yAxis < 0) // forward
+	if (yAxis < 0)
 	{
 		//TO BE
 		//FILLED IN
@@ -185,7 +185,7 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 			parsedRight = parsedY + parsedX;
 		
 	}
-	else //backwards
+	else
 	{
 			parsedLeft = parsedY - parsedX;
 			parsedRight = parsedY + parsedX;

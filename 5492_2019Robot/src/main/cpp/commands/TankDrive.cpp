@@ -37,11 +37,37 @@ void TankDrive::Execute() {
     double* visionArray = Robot::m_oi.ReturnVisionX();
     double offset = visionArray[0];
     double area = visionArray[1];
-    double Kpa = (0.0095-0.03)/(6.5-0.03); //(Far away Kp - Close Kp)/ (Far away area - Up close area)
+    double farKP = 0.0095;
+    double closeKP = 0.03;
+    double farArea = 6.5;
+    double closeArea = 0.03;
+    double Kpa = (farKP-closeKP)/(farArea-closeArea); //(Far away Kp - Close Kp)/ (Far away area - Up close area)
     bool* lightArray = Robot::m_oi.ReturnLightSensors();
     frc::SmartDashboard::PutBoolean("LightSensor1", lightArray[0]);
 
-    Kp = Kpa * area - Kpa * 0.03 + 0.03; // Kp = Kpa * area - Kpa * Close area + Close Kp
+    /*
+        Kp    
+        |
+        |
+        |\
+        | \
+Close KP|--\
+        |  |\
+        |  | \
+        |  |  \
+        |  |   \
+        |  |    \
+        |  |     \
+Far KP  |--|----- \
+        |  |      |\
+        |  |      | \
+        |  |      |  \ 
+        ------------------------------- Area
+          Close  Far
+          Area   Area
+    */
+
+    Kp = Kpa * area - Kpa * closeArea + closeKP; // Kp = Kpa * area - Kpa * Close area + Close Kp
     double forwardBack = -Robot::m_oi.ReturnDriverYAxis();
     if (area == 0) {
       if ((lightArray[0] && lightArray[1])){ // 0 is left 1 is right, true = Don't see line, false = I see something
