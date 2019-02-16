@@ -13,7 +13,7 @@ const int frontRightDrive = 1; //encoder
 const int backLeftDrive = 15;
 const int backRightDrive = 0;
 
-const int RampTime = .3;
+const int RampTime = .5;
 //Collector
 const int cargoClaw = 5;
 //Climb
