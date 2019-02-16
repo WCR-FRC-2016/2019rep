@@ -119,29 +119,28 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 	double power = 2.3;
 	
 	//New stuff here for driver improvements.
-	double minX = 0.5;
+	double minX = 0.25;
 	double minY = 0.5;
-	double minValue = 0.5;
-	double driverSlope = (1-minValue)/(1);
+	double ySlope = (1-minY)/(1);
+	double xSlope = (1-minX)/(1);
+	double XSC = 0;
 	//Setting inputs to a power
 
-	/*
-	if (xAxis > 0) {
-		xAxis = driverSlope * xAxis + minX;
-	}
-	else if (xAxis<0) {
-		xAxis = driverSlope * xAxis - minX;
-	}
+
 	if (yAxis > 0) {
-		yAxis = driverSlope * yAxis + minY;
+		yAxis = ySlope * yAxis + minY;
+		XSC = xSlope * yAxis + 1.0;
+		xAxis = xAxis * XSC;
 	} 
-	else if (yAxis<0) {
-		yAxis = driverSlope * yAxis - minY;
+	else if (yAxis < 0) {
+		yAxis = ySlope * yAxis - minY;
+		XSC = xSlope * -yAxis + 1.0;
+		xAxis = xAxis * XSC;
 	}
- */
+ 
 
 
-	parsedX = pow((xAxis>0)?xAxis:-xAxis, power) * (xAxis / (xAxis>0)?xAxis:-xAxis);
+	parsedX = xAxis; //pow((xAxis>0)?xAxis:-xAxis, power) * (xAxis / (xAxis>0)?xAxis:-xAxis);
 
 	parsedY = pow((yAxis>0)?yAxis:-yAxis, power) * (yAxis / (yAxis>0)?yAxis:-yAxis) * driveConstant;
 
@@ -160,7 +159,7 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 			parsedLeft = parsedY - parsedX;
 			parsedRight = parsedY + parsedX;
 	}
-	_diffDrive->ArcadeDrive(xAxis, yAxis, false);
+	_diffDrive->TankDrive(xAxis, yAxis, false);
 
 }
 void DriveBase::RampSwitch(bool rampOn) {
