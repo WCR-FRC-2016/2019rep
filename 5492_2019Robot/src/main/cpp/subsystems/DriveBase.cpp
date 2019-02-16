@@ -119,14 +119,45 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 	double power = 2.3;
 	
 	//New stuff here for driver improvements.
-	double minX = 0.25;
+	double minX = 0.65;
 	double minY = 0.5;
 	double ySlope = (1-minY)/(1);
-	double xSlope = (1-minX)/(1);
+	double xSlope = (minX-1)/(1);
 	double XSC = 0;
 	//Setting inputs to a power
 
+	//YAxis setup to have a minimum value required to drive the Talon when the YAxis is not zero.
+	/*		Yaxis Parsed
+			|  /
+			| /
+	   minY	|/
+			|
+	--------------------- YAxis Raw
+			|
+		   /| -minY
+		  /	|
+		 /	|
+	*/ 
+	//XAxis setup to have a maximum value when the Yaxis is 0 and a minimum value when the Y axis is 1. 
 
+	/*	XSC
+		|
+	1.0	|\
+		| \
+		|  \
+		|   \
+		|    \
+		|	  \
+		|	   \
+		|	 	\
+	Minx|		|\
+		|		| \
+		|		|  \
+		|		|   \
+		----------------YAxis
+	   0.0 	   1.0
+
+	*/
 	if (yAxis > 0) {
 		yAxis = ySlope * yAxis + minY;
 		XSC = xSlope * yAxis + 1.0;
@@ -150,8 +181,8 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 		//FILLED IN
 		//Turning Left?
 		
-			parsedLeft = parsedY + parsedX;
-			parsedRight = parsedY - parsedX;
+			parsedLeft = parsedY - parsedX;
+			parsedRight = parsedY + parsedX;
 		
 	}
 	else //backwards
@@ -159,7 +190,7 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 			parsedLeft = parsedY - parsedX;
 			parsedRight = parsedY + parsedX;
 	}
-	_diffDrive->TankDrive(xAxis, yAxis, false);
+	_diffDrive->TankDrive(-parsedLeft, parsedRight, false);
 
 }
 void DriveBase::RampSwitch(bool rampOn) {
