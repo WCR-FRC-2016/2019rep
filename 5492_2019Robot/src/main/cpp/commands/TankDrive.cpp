@@ -26,6 +26,7 @@ void TankDrive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void TankDrive::Execute() {
+  Robot::m_drivebase.reverseDrive(Robot::m_oi.ReturnDriverBButton());
   if (Robot::m_oi.ReturnDriverXButton())
   {
     Robot::m_oi.SwapLedMode(3);
