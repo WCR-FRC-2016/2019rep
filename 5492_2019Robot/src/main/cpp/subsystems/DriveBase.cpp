@@ -128,12 +128,12 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 
 	//YAxis setup to have a minimum value required to drive the Talon when the YAxis is not zero.
 	/*		Yaxis Parsed
-			|  /
-			| /
-	   minY	|/
-			|
+				|  /
+				| /
+	minY	|/
+				|
 	--------------------- YAxis Raw
-			|
+				|
 		   /| -minY
 		  /	|
 		 /	|
@@ -142,18 +142,18 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 
 	/*	XSC
 		|
-	1.0	|\
+1.0	|\
 		| \
 		|  \
 		|   \
 		|    \
-		|	  \
-		|	   \
-		|	 	\
-	Minx|		|\
-		|		| \
-		|		|  \
-		|		|   \
+		|	  	\
+		|	   	 \
+		|	 			\
+Minx|				|\
+		|				| \
+		|				|  \
+		|				|   \
 		----------------YAxis
 	   0.0 	   1.0
 
