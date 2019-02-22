@@ -142,18 +142,18 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 
 	/*	XSC
 		|
-1.0	|\
+1.0	    |\
 		| \
 		|  \
 		|   \
 		|    \
-		|	  	\
-		|	   	 \
-		|	 			\
-Minx|				|\
-		|				| \
-		|				|  \
-		|				|   \
+		|	  \
+		|	   \
+		|	 	\
+Minx|			 \
+		|		  \		
+		|		   \	|	
+		|			\	|
 		----------------YAxis
 	   0.0 	   1.0
 
