@@ -142,7 +142,9 @@ void HatchHarpoon::HarpoonLauncher(){
     break;
   }
 }
-
+void HatchHarpoon::FirmlyGrasp(double motor){
+   HatchHarpoonMotor->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, motor);
+}
 void HatchHarpoon::InitDefaultCommand() {
   if (!initialized) {
     Robot::m_hatchharpoon.HatchHarpoonInit();

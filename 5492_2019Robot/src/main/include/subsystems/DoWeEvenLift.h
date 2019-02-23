@@ -19,5 +19,7 @@ class DoWeEvenLift : public frc::Subsystem {
   DoWeEvenLift();
   void LiftInit();
   void Lift(double joystick);
+  void ChonkySquat(double position);
+  bool WeighIn(double setPoint);
   void InitDefaultCommand() override;
 };

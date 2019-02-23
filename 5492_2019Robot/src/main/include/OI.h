@@ -17,6 +17,13 @@ class OI {
 	double ReturnDriverXAxis();
 	double ReturnDriverYAxis();
 
+	frc::JoystickButton* manButtonX;
+	frc::JoystickButton* manButtonY;
+	frc::JoystickButton* manButtonB;
+	frc::JoystickButton* manButtonA;
+	frc::JoystickButton* manSelect;
+	frc::JoystickButton* manStart;
+
 	double ReturnManualLeftYAxis();
 	double ReturnManualRightYAxis();
 
@@ -44,6 +51,8 @@ class OI {
 	bool ReturnManualLeftTrigger();
 	bool ReturnManualAButton();
 	bool ReturnManualRightBumper();
+	bool ReturnManualYButton();
+	bool ReturnManualBButton();
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;

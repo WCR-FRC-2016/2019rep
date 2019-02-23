@@ -5,29 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/CargoClawCommand.h"
+#include "commands/FirmlyGrasp.h"
 #include "Robot.h"
-#include "OI.h"
-CargoClawCommand::CargoClawCommand() {
+
+FirmlyGrasp::FirmlyGrasp(double motor) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(&Robot::m_cargoclaw);
+  Requires(&Robot::m_hatchharpoon);
+  vroom = motor;
 }
 
 // Called just before this Command runs the first time
-void CargoClawCommand::Initialize() {}
+void FirmlyGrasp::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void CargoClawCommand::Execute() {
-  Robot::m_cargoclaw.CollectCargo(Robot::m_oi.ReturnManualAButton());
+void FirmlyGrasp::Execute() {
+  Robot::m_hatchharpoon.FirmlyGrasp(vroom);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool CargoClawCommand::IsFinished() { return false; }
+bool FirmlyGrasp::IsFinished() { return true; }
 
 // Called once after isFinished returns true
-void CargoClawCommand::End() {}
+void FirmlyGrasp::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void CargoClawCommand::Interrupted() {}
+void FirmlyGrasp::Interrupted() {}

@@ -17,6 +17,7 @@ class HatchHarpoon : public frc::Subsystem {
   HatchHarpoon();
   void InitDefaultCommand() override;
   void HatchHarpoonInit();
+  void FirmlyGrasp(double MotorValue);
   int FreeWilly();
   void HarpoonLauncher();
   enum PositionState {

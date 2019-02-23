@@ -29,6 +29,9 @@ void DoWeEvenLift::LiftInit() {
     OpenLiftMotor->Invert = true;
     LiftFollower = OpenLiftMotor->Open(lift2);
     LiftFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, lift1);
+    LiftLeader->Config_kP(0, liftP, 0);
+    LiftLeader->Config_kI(0, liftI, 0);
+    LiftLeader->Config_kD(0, liftD, 0);
 }
 void DoWeEvenLift::Lift(double joystick){
   if (joystick > 0){
@@ -38,6 +41,15 @@ void DoWeEvenLift::Lift(double joystick){
     joystick = joystick / 1.5;
   }
   LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, joystick);
+}
+void DoWeEvenLift::ChonkySquat(double setPoint){
+    LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, setPoint);
+}
+bool DoWeEvenLift::WeighIn(double setPoint){
+  if ((Robot::m_oi.ReturnManualLeftYAxis() != 0) || (Robot::m_oi.ReturnManualRightYAxis() != 0)) {
+    frc::Scheduler::GetInstance()->RemoveAll();
+  }
+  return ((abs(LiftLeader->GetSelectedSensorPosition(0) - setPoint) < liftError));
 }
 void DoWeEvenLift::InitDefaultCommand() {
   // Set the default command for a subsystem here.

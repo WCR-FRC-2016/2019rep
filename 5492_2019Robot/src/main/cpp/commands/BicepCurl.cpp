@@ -5,29 +5,43 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/CargoClawCommand.h"
+#include "commands/BicepCurl.h"
 #include "Robot.h"
-#include "OI.h"
-CargoClawCommand::CargoClawCommand() {
+#include "RobotMap.h"
+
+BicepCurl::BicepCurl(double position) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(&Robot::m_cargoclaw);
+  Requires(&Robot::m_bicep);
+  BicepCurl::SetInterruptible(true);
+  setPoint = position;
 }
 
 // Called just before this Command runs the first time
-void CargoClawCommand::Initialize() {}
+void BicepCurl::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void CargoClawCommand::Execute() {
-  Robot::m_cargoclaw.CollectCargo(Robot::m_oi.ReturnManualAButton());
+void BicepCurl::Execute() {
+  Robot::m_bicep.BicepCurl(setPoint);
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool CargoClawCommand::IsFinished() { return false; }
+bool BicepCurl::IsFinished() { 
+  return (Robot::m_bicep.WeighIn(setPoint)); 
+  }
+//returns true after setting setpoint once
 
 // Called once after isFinished returns true
-void CargoClawCommand::End() {}
-
+void BicepCurl::End() {
+  Robot::m_bicep.Rotato(0);
+}
+ 
 // Called when another command which requires one or more of the same
-// subsystems is scheduled to run
-void CargoClawCommand::Interrupted() {}
+// subsystems is scheduledto run
+void BicepCurl::Interrupted()
+  
+ {
+ frc::Scheduler::GetInstance()->RemoveAll();
+ 
+}
