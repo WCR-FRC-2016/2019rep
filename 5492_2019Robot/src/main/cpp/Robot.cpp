@@ -20,6 +20,7 @@
 
 #include <subsystems/DoWeEvenLift.h>
 #include <cscore_oo.h>
+#include "subsystems/DoWeEvenSee.h"
 
 
 
@@ -30,6 +31,8 @@ HatchHarpoon Robot::m_hatchharpoon;
 CargoClaw Robot::m_cargoclaw;
 DoWeEvenLift Robot::m_doweevenlift;
 Bicep Robot::m_bicep;
+DoWeEvenSee Robot::m_doweevensee;
+
 
 
 void Robot::RobotInit() {

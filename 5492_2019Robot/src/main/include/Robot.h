@@ -18,6 +18,7 @@
 #include "subsystems/DriveBase.h"
 #include "subsystems/CargoClaw.h"
 #include "subsystems/DoWeEvenLift.h"
+#include "subsystems/DoWeEvenSee.h"
 #include "subsystems/Bicep.h"
 
 #include <networktables/NetworkTable.h>
@@ -33,6 +34,7 @@ class Robot : public frc::TimedRobot {
   static HatchHarpoon m_hatchharpoon; 
   static CargoClaw m_cargoclaw;
   static DoWeEvenLift m_doweevenlift;
+  static DoWeEvenSee m_doweevensee;
   static Bicep m_bicep;
 
 

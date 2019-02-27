@@ -56,6 +56,10 @@ const double armLow = 0;
 const double armMid = 0;
 const double armError = 0;
 
+const double armCenter = 0;
+const double forwardCam = 0;
+const double backwardCam = 0;
+
 
 const double RightP = 0.0678;
 const double RightI = 6.78E-6;

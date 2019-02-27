@@ -45,6 +45,11 @@ bool Bicep::WeighIn(double setPoint){
   return (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError);
 }
 
+double Bicep::MuscleCam() 
+{
+  return ArmLeader->GetSelectedSensorPosition(0);
+}
+
 void Bicep::InitDefaultCommand() {
   if (!initialized)
   {

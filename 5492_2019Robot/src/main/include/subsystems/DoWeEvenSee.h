@@ -8,18 +8,18 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
+#include <frc/Servo.h>
 
-class Bicep : public frc::Subsystem {
+class DoWeEvenSee : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  bool initialized = false;
+  bool DoWeEvenSeeInitialized = false;
+  frc::Servo* Sternocleidomastoid;
+
  public:
-  Bicep();
-  void BicepStretch();
-  void Rotato(double joystick);
-  void BicepCurl(double setPoint);
-  bool WeighIn(double setPoint);
+  DoWeEvenSee();
+  void InvestingFascia();
+  void CameraInit();
   void InitDefaultCommand() override;
-  double MuscleCam();
 };
