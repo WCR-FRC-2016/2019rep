@@ -19,5 +19,5 @@ class CargoClaw : public frc::Subsystem {
   CargoClaw();
   void InitDefaultCommand() override;
   void InitCargoClaw();
-  void CollectCargo(bool AButton);
+  void CollectCargo(bool RightBumbper, bool spit);
 };

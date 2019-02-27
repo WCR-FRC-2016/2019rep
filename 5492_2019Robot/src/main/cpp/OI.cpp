@@ -17,6 +17,7 @@
 #include "commands/CleanAndJerk.h"
 #include "RobotMap.h"
 #include "commands/FirmlyGrasp.h"
+#include "commands/CargoClawCommand.h"
 	
 	 
 OI::OI() {
@@ -51,6 +52,7 @@ void OI::OIInit(){
 	manSelect->WhileHeld(new FirmlyGrasp(-manHarpoon));
 	manStart->WhileHeld(new FirmlyGrasp(manHarpoon));
 	
+
 }	
 bool OI::ReturnDriverBButton() {
 	return _driverStick->GetBButtonPressed();

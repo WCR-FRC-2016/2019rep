@@ -23,7 +23,6 @@ class OI {
 	frc::JoystickButton* manButtonA;
 	frc::JoystickButton* manSelect;
 	frc::JoystickButton* manStart;
-
 	double ReturnManualLeftYAxis();
 	double ReturnManualRightYAxis();
 
