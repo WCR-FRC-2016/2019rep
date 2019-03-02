@@ -5,30 +5,41 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/FirmlyGrasp.h"
+#include "commands/FirmlyGraspIt.h"
 #include "Robot.h"
+#include "RobotMap.h"
 
-FirmlyGrasp::FirmlyGrasp(double motor) {
+FirmlyGraspIt::FirmlyGraspIt() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_hatchharpoon);
-  vroom = motor;
+
 }
 
 // Called just before this Command runs the first time
-void FirmlyGrasp::Initialize() {}
+void FirmlyGraspIt::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void FirmlyGrasp::Execute() {
+void FirmlyGraspIt::Execute() {
+  double vroom = 0;
+  if (Robot::m_oi.ReturnManualLeftBump()){
+    vroom = 1;
+  }
+  else if (Robot::m_oi.ReturnManualLeftTrigger()){
+    vroom = -1;
+  }
+  else{
+    vroom = 0;
+  }
   Robot::m_hatchharpoon.FirmlyGrasp(vroom);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool FirmlyGrasp::IsFinished() { return true; }
+bool FirmlyGraspIt::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void FirmlyGrasp::End() {}
+void FirmlyGraspIt::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void FirmlyGrasp::Interrupted() {}
+void FirmlyGraspIt::Interrupted() {}

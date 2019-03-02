@@ -116,7 +116,7 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 	double parsedRight;
 	double parsedX;
 	double parsedY;
-	double power = 2.3;
+	double power = 3;
 	//Setting inputs to a power
 	
 	parsedX = pow((xAxis>0)?xAxis:-xAxis, power) * (xAxis / (xAxis>0)?xAxis:-xAxis);

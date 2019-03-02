@@ -16,7 +16,7 @@
 #include <frc/WPILib.h>
 #include "commands/CleanAndJerk.h"
 #include "RobotMap.h"
-#include "commands/FirmlyGrasp.h"
+#include "commands/FirmlyGraspIt.h"
 #include "commands/CargoClawCommand.h"
 	
 	 
@@ -39,18 +39,18 @@ void OI::OIInit(){
 	}
 	LightSensorZero = new frc::DigitalInput(0);
 	LightSensorOne = new frc::DigitalInput(1);
-	manButtonX = new frc::JoystickButton(_manualStick, 3);
-	manButtonY = new frc::JoystickButton(_manualStick, 4);
-	manButtonB = new frc::JoystickButton(_manualStick, 2);
-	manButtonA = new frc::JoystickButton(_manualStick, 1);
+	//manButtonX = new frc::JoystickButton(_manualStick, 3);
+	//manButtonY = new frc::JoystickButton(_manualStick, 4);
+	//manButtonB = new frc::JoystickButton(_manualStick, 2);
+	//manButtonA = new frc::JoystickButton(_manualStick, 1);
 	double habLevel[2] = {armHab, liftHab};
 	double lowLevel[2] = {armLow, liftLow};
 	double midLevel[2] = {armMid, liftMid};
-	manButtonX->ToggleWhenPressed(new CleanAndJerk(habLevel));
-	manButtonY->ToggleWhenPressed(new CleanAndJerk(midLevel));
-	manButtonB->ToggleWhenPressed(new CleanAndJerk(lowLevel));
-	manSelect->WhileHeld(new FirmlyGrasp(-manHarpoon));
-	manStart->WhileHeld(new FirmlyGrasp(manHarpoon));
+	//manButtonX->ToggleWhenPressed(new CleanAndJerk(habLevel));
+	//manButtonY->ToggleWhenPressed(new CleanAndJerk(midLevel));
+	//manButtonB->ToggleWhenPressed(new CleanAndJerk(lowLevel));
+	//manSelect->WhileHeld(new FirmlyGrasp(-manHarpoon));
+	//manStart->WhileHeld(new FirmlyGrasp(manHarpoon));
 	
 
 }	
@@ -63,7 +63,7 @@ double OI::ReturnDriverXAxis(){
 
 }
 bool OI::ReturnManualRightBumper(){
-	return _manualStick->GetBumperPressed(frc::GenericHID::kRightHand);
+	return _manualStick->GetBumper(frc::GenericHID::kRightHand);
 }
 double OI::ReturnDriverYAxis(){
 	return DeadBand(_driverStick->GetY(frc::GenericHID::kLeftHand));
@@ -85,7 +85,7 @@ bool OI::ReturnManualLeftTrigger(){
 }
 
 bool OI::ReturnManualLeftBump(){
-	return _manualStick->GetBumperPressed(frc::GenericHID::kLeftHand);
+	return _manualStick->GetBumper(frc::GenericHID::kLeftHand);
 }
 
 bool OI::ReturnDriverXButton() {

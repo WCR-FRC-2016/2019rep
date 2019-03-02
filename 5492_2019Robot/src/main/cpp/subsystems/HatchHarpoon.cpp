@@ -20,6 +20,7 @@
 #include <ctre/Phoenix.h>
 #include "OpenOneMotor.h"
 #include "commands/SpearedWhale.h"
+#include <commands/FirmlyGraspIt.h>
 WPI_TalonSRX* HatchHarpoonMotor;
 
 HatchHarpoon::HatchHarpoon() : Subsystem("ExampleSubsystem") {}
@@ -28,8 +29,8 @@ void HatchHarpoon::HatchHarpoonInit() {
 
   OpenOneMotor* OpenHatchHarpoonMotor = new OpenOneMotor();
   HatchHarpoonMotor = OpenHatchHarpoonMotor-> Open(harpoon);
-  HatchHarpoonMotor->ConfigForwardLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_Disabled,0);
-  HatchHarpoonMotor->ConfigReverseLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_Disabled,0);
+  HatchHarpoonMotor->ConfigForwardLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_NormallyOpen,0);
+  HatchHarpoonMotor->ConfigReverseLimitSwitchSource(ctre::phoenix::motorcontrol::LimitSwitchSource::LimitSwitchSource_FeedbackConnector,ctre::phoenix::motorcontrol::LimitSwitchNormal_NormallyOpen,0);
   
   
   HatchHarpoonMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 0);
@@ -149,7 +150,7 @@ void HatchHarpoon::InitDefaultCommand() {
   if (!initialized) {
     Robot::m_hatchharpoon.HatchHarpoonInit();
 	}
-  Robot::m_hatchharpoon.SetDefaultCommand(new SpearedWhale()); 
+  Robot::m_hatchharpoon.SetDefaultCommand(new FirmlyGraspIt() ); 
 }
 
 // Put methods for controlling this subsystem

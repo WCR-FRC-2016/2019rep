@@ -37,7 +37,7 @@ void CargoClaw::InitCargoClaw(){
 void CargoClaw::CollectCargo(bool AButton, bool spit){
   LimitSwitch = CargoClawMotor->GetSensorCollection().IsFwdLimitSwitchClosed();
   if (AButton){
-    if (ClawValue = 0){
+    if (ClawValue == 0){
       ClawValue = (spit)?BackwardClaw:ForwardClaw;
     }
     else{

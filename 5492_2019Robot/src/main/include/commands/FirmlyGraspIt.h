@@ -9,9 +9,9 @@
 
 #include <frc/commands/Command.h>
 
-class FirmlyGrasp : public frc::Command {
+class FirmlyGraspIt : public frc::Command {
  public:
-  FirmlyGrasp(double motor);
+  FirmlyGraspIt();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

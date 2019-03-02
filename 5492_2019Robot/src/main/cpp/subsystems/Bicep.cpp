@@ -33,7 +33,7 @@ void Bicep::BicepStretch(){
   ArmLeader->Config_kD(0, armD, 0);
 }
 void Bicep::Rotato(double joystick) {
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick);
+  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
 }
 void Bicep::BicepCurl(double setPoint){
   ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,setPoint);
