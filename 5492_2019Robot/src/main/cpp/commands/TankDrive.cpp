@@ -89,14 +89,14 @@ void TankDrive::Execute() {
         adjust = Kp * offset - min_command;
       }
     }
-    Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, forwardBack);
+    Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, -forwardBack);
     frc::SmartDashboard::PutNumber("Vision Adjustment", adjust);
     prevError = offset;
   }
   else{
     Robot::m_drivebase.RampSwitch(true);
     Robot::m_oi.SwapLedMode(1);
-    Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
+    Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), Robot::m_oi.ReturnDriverYAxis());
     Isee = false;
   }
 }

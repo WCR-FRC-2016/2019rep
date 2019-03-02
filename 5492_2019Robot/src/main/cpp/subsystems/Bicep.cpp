@@ -25,12 +25,12 @@ void Bicep::BicepStretch(){
   initialized = true;
   OpenOneMotor* OpenBicepMotor =  new OpenOneMotor();
   ArmLeader = OpenBicepMotor->Open(arm1);
-  OpenBicepMotor->Invert = true;
+  OpenBicepMotor->Invert = false;
   ArmFollower = OpenBicepMotor->Open(arm2);
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
 }
 void Bicep::Rotato(double joystick) {
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick);
+  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/2);
 }
 
 

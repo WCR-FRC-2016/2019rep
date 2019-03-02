@@ -20,8 +20,8 @@ const int cargoClaw = 5;
 const int climb1 = 4;
 const int climb2 = 5;
 //Elevator
-const int lift1 = 2;
-const int lift2 = 3;
+const int lift1 = 3;
+const int lift2 = 2;
 //Pneumatics
 const int harpoon = 4;
 const int harpoonOpen = 0;
