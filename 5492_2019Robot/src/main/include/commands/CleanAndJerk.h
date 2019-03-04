@@ -7,18 +7,9 @@
 
 #pragma once
 
-#include <frc/commands/Subsystem.h>
+#include <frc/commands/CommandGroup.h>
 
-class Bicep : public frc::Subsystem {
- private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  bool initialized = false;
+class CleanAndJerk : public frc::CommandGroup {
  public:
-  Bicep();
-  void BicepStretch();
-  void Rotato(double joystick);
-  void BicepCurl(double setPoint);
-  bool WeighIn(double setPoint);
-  void InitDefaultCommand() override;
+  CleanAndJerk(double setPoint[2]);
 };

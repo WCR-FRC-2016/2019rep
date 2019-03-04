@@ -34,28 +34,21 @@ void CargoClaw::InitCargoClaw(){
   CargoClawMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,0,0);
   Initialized = true;
 }
-void CargoClaw::CollectCargo(bool AButton){
+void CargoClaw::CollectCargo(bool AButton, bool spit){
   LimitSwitch = CargoClawMotor->GetSensorCollection().IsFwdLimitSwitchClosed();
-  if ( AButton && (LimitSwitch == 0)){
+  if (AButton){
     if (ClawValue == 0){
-      ClawValue = ForwardClaw;
+      ClawValue = (spit)?BackwardClaw:ForwardClaw;
     }
     else{
       ClawValue = 0;
     }
-  }
-  else if(AButton && LimitSwitch){
-    if (ClawValue == 0){
-      ClawValue == BackwardClaw;
-    }
-    else{
-      ClawValue = 0;
-    }     
-  }
-  else if (LimitSwitch == 1) {
-    ClawValue = 0;
-  }
+  }  
+  
+  //else if (LimitSwitch == 1) {
+  //  ClawValue = 0;
+  //}
   CargoClawMotor->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, ClawValue);
-}
+} 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

@@ -14,10 +14,17 @@
 #include <networktables/NetworkTableEntry.h>
 #include <networktables/NetworkTableInstance.h>
 #include <frc/WPILib.h>
-
+#include "commands/CleanAndJerk.h"
+#include "RobotMap.h"
+#include "commands/FirmlyGraspIt.h"
+#include "commands/CargoClawCommand.h"
+	
+	 
 OI::OI() {
-  _driverStick = 0;
+ 	 _driverStick = 0;
 	_manualStick = 0;
+
+	
 	table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
   // Process operator interface input here.
 }
@@ -32,16 +39,31 @@ void OI::OIInit(){
 	}
 	LightSensorZero = new frc::DigitalInput(0);
 	LightSensorOne = new frc::DigitalInput(1);
-}
+	//manButtonX = new frc::JoystickButton(_manualStick, 3);
+	//manButtonY = new frc::JoystickButton(_manualStick, 4);
+	//manButtonB = new frc::JoystickButton(_manualStick, 2);
+	//manButtonA = new frc::JoystickButton(_manualStick, 1);
+	double habLevel[2] = {armHab, liftHab};
+	double lowLevel[2] = {armLow, liftLow};
+	double midLevel[2] = {armMid, liftMid};
+	//manButtonX->ToggleWhenPressed(new CleanAndJerk(habLevel));
+	//manButtonY->ToggleWhenPressed(new CleanAndJerk(midLevel));
+	//manButtonB->ToggleWhenPressed(new CleanAndJerk(lowLevel));
+	//manSelect->WhileHeld(new FirmlyGrasp(-manHarpoon));
+	//manStart->WhileHeld(new FirmlyGrasp(manHarpoon));
+	
+
+}	
 bool OI::ReturnDriverBButton() {
 	return _driverStick->GetBButtonPressed();
 }
+
 double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
 }
 bool OI::ReturnManualRightBumper(){
-	return _manualStick->GetBumperPressed(frc::GenericHID::kRightHand);
+	return _manualStick->GetBumper(frc::GenericHID::kRightHand);
 }
 double OI::ReturnDriverYAxis(){
 	return DeadBand(_driverStick->GetY(frc::GenericHID::kLeftHand));
@@ -63,7 +85,7 @@ bool OI::ReturnManualLeftTrigger(){
 }
 
 bool OI::ReturnManualLeftBump(){
-	return _manualStick->GetBumperPressed(frc::GenericHID::kLeftHand);
+	return _manualStick->GetBumper(frc::GenericHID::kLeftHand);
 }
 
 bool OI::ReturnDriverXButton() {
@@ -97,6 +119,12 @@ bool OI::ReturnManualAButton() {
 }
 bool OI::ReturnManualXButton(){
 	return _manualStick->GetXButton();
+}
+bool OI::ReturnManualYButton() {
+	return _manualStick->GetYButtonPressed();	
+}
+bool OI::ReturnManualBButton() {
+	return _manualStick->GetBButtonPressed();	
 }
 
 

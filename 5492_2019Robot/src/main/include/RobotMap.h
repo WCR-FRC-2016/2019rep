@@ -18,14 +18,42 @@ const int RampTime = .5;
 const int cargoClaw = 5;
 
 //Elevator
-const int lift1 = 2;
-const int lift2 = 3;
+const int lift1 = 3;//should be 2 , r2 is swapped
+const int lift2 = 2;
+
+const double liftP = 0;
+const double liftI = 0;
+const double liftD = 0;
+
+const double liftHab = 0;
+const double liftLow = 0;
+const double liftMid = 0;
+const double liftError = 0;
 //Pneumatics
 const int harpoon = 4;
+
+const double harpoonOpen = 0;
+const double harpoonMid = 0;
+const double harpoonClosed = 0;
+const double manHarpoon = .5; 
+
+const double harpoonP = 0;
+const double harpoonI = 0;
+const double harpoonD = 0;
 
 //Arm
 const int arm1 = 12;
 const int arm2 = 13;
+
+const double armP = 0;
+const double armI = 0;
+const double armD = 0;
+
+const double armHab = 0;
+const double armLow = 0;
+const double armMid = 0;
+const double armError = 0;
+
 
 const double RightP = 0.0678;
 const double RightI = 6.78E-6;

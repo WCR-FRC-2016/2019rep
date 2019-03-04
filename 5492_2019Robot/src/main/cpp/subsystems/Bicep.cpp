@@ -28,11 +28,22 @@ void Bicep::BicepStretch(){
   OpenBicepMotor->Invert = true;
   ArmFollower = OpenBicepMotor->Open(arm2);
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
+  ArmLeader->Config_kP(0, armP, 0);
+  ArmLeader->Config_kI(0, armI, 0);
+  ArmLeader->Config_kD(0, armD, 0);
 }
 void Bicep::Rotato(double joystick) {
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick);
+  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
 }
-
+void Bicep::BicepCurl(double setPoint){
+  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,setPoint);
+}
+bool Bicep::WeighIn(double setPoint){
+  if ((Robot::m_oi.ReturnManualLeftYAxis() != 0) || (Robot::m_oi.ReturnManualRightYAxis() != 0)) {
+    frc::Scheduler::GetInstance()->RemoveAll();
+  }
+  return (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError);
+}
 
 void Bicep::InitDefaultCommand() {
   if (!initialized)

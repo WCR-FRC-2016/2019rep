@@ -116,8 +116,9 @@ void DriveBase::ArcadeDrive(double xAxis, double yAxis) {
 	double parsedRight;
 	double parsedX;
 	double parsedY;
+
 	double power = 2.3;
-	
+
 	//New stuff here for driver improvements.
 	double minX = 0.65;
 	double minY = 0.5;

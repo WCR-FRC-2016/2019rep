@@ -17,13 +17,12 @@ class HatchHarpoon : public frc::Subsystem {
   HatchHarpoon();
   void InitDefaultCommand() override;
   void HatchHarpoonInit();
+  void FirmlyGrasp(double MotorValue);
   int FreeWilly();
   void HarpoonLauncher();
   enum PositionState {
     CLOSED, MID, OPEN, GotoClosed, GotoMid, GotoOpen
   };
   int CurrentState;
-  double ForwardMotor = 0.5;
-  double BackwardMotor = -0.5;
-  double CurrentMotor = 0;
+  double CurrentPosition = 0;
 };
