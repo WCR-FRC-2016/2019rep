@@ -70,7 +70,7 @@ double OI::ReturnDriverYAxis(){
 }
 
 double OI::DeadBand(double joystick) {
-	if (-0.2 < joystick && joystick < 0.2) {
+	if (-0.1295 < joystick && joystick < 0.1295) {
 		joystick = 0;
 	}
 		return joystick;

@@ -13,12 +13,10 @@ const int frontRightDrive = 1; //encoder
 const int backLeftDrive = 15;
 const int backRightDrive = 0;
 
-const int RampTime = .3;
+const int RampTime = .5;
 //Collector
 const int cargoClaw = 5;
-//Climb
-const int climb1 = 4;
-const int climb2 = 5;
+
 //Elevator
 const int lift1 = 3;//should be 2 , r2 is swapped
 const int lift2 = 2;
@@ -33,6 +31,7 @@ const double liftMid = 0;
 const double liftError = 0;
 //Pneumatics
 const int harpoon = 4;
+
 const double harpoonOpen = 0;
 const double harpoonMid = 0;
 const double harpoonClosed = 0;
@@ -42,7 +41,6 @@ const double harpoonP = 0;
 const double harpoonI = 0;
 const double harpoonD = 0;
 
-const int pneumaticValve2 = 8;
 //Arm
 const int arm1 = 12;
 const int arm2 = 13;
