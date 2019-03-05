@@ -25,7 +25,7 @@ void Bicep::BicepStretch(){
   initialized = true;
   OpenOneMotor* OpenBicepMotor =  new OpenOneMotor();
   ArmLeader = OpenBicepMotor->Open(arm1);
-  OpenBicepMotor->Invert = true;
+  //OpenBicepMotor->Invert = true;
   ArmFollower = OpenBicepMotor->Open(arm2);
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
   ArmLeader->Config_kP(0, armP, 0);
