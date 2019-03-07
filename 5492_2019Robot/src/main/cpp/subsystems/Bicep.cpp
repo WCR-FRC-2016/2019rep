@@ -18,6 +18,7 @@
 #include <ctre/Phoenix.h>
 #include <OpenOneMotor.h>
 #include "commands/Flex.h"
+#include "RobotMap.h"
 WPI_TalonSRX* ArmLeader;
 WPI_TalonSRX* ArmFollower;
 Bicep::Bicep() : Subsystem("Bicep") {}
@@ -33,6 +34,18 @@ void Bicep::BicepStretch(){
   ArmLeader->Config_kD(0, armD, 0);
 }
 void Bicep::Rotato(double joystick) {
+    double stayPut = 0;
+    double currentPosition = ArmLeader->GetSelectedSensorPosition(0);
+    if (joystick == 0){
+     if (abs(currentPosition) > armCramps)
+     {
+       stayPut = armStopIt * (abs(currentPosition)/currentPosition);
+      }
+    }
+    else{
+      stayPut = 0;
+  }
+  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3 + stayPut);
   ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
 }
 void Bicep::BicepCurl(double setPoint){
