@@ -18,8 +18,8 @@ const int RampTime = .5;
 const int cargoClaw = 5;
 
 //Elevator
-const int lift1 = 3;//should be 2 , r2 is swapped
-const int lift2 = 2;
+const int lift1 = 2;//should be 2 , r2 is swapped
+const int lift2 = 3;
 
 const double liftP = 0;
 const double liftI = 0;

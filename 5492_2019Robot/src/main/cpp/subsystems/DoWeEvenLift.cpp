@@ -40,7 +40,7 @@ void DoWeEvenLift::Lift(double joystick){
   else {
     joystick = joystick / 3;
   }
-  LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, -joystick);
+  LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, joystick);
 }
 void DoWeEvenLift::ChonkySquat(double setPoint){
     LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, setPoint);

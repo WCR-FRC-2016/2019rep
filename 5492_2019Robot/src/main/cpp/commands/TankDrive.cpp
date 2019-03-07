@@ -123,7 +123,7 @@ Far KP  |--|----- \
   else{
     Robot::m_drivebase.RampSwitch(true);
     Robot::m_oi.SwapLedMode(1);
-    Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), Robot::m_oi.ReturnDriverYAxis());
+    Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
     Isee = false;
   }
 }
