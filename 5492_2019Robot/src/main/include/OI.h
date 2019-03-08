@@ -25,7 +25,7 @@ class OI {
 	frc::JoystickButton* manStart;
 	double ReturnManualLeftYAxis();
 	double ReturnManualRightYAxis();
-
+	bool ReturnDriverYButton();
 	void OIInit();
 	double DeadBand(double joystick);
 

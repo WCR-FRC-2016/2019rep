@@ -39,6 +39,7 @@ void Robot::RobotInit() {
   m_oi.OIInit();
   //frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
   cs::UsbCamera camera = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+    
   camera.SetVideoMode(cs::VideoMode::kYUYV, 640, 360, 30);
  
 }

@@ -57,7 +57,9 @@ void OI::OIInit(){
 bool OI::ReturnDriverBButton() {
 	return _driverStick->GetBButtonPressed();
 }
-
+bool OI::ReturnDriverYButton(){
+	return _driverStick->GetYButtonPressed();
+}
 double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
@@ -121,10 +123,10 @@ bool OI::ReturnManualXButton(){
 	return _manualStick->GetXButton();
 }
 bool OI::ReturnManualYButton() {
-	return _manualStick->GetYButtonPressed();	
+	return _manualStick->GetYButton();	
 }
 bool OI::ReturnManualBButton() {
-	return _manualStick->GetBButtonPressed();	
+	return _manualStick->GetBButton();	
 }
 
 

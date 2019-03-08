@@ -27,6 +27,7 @@ void Bicep::BicepStretch(){
   OpenOneMotor* OpenBicepMotor =  new OpenOneMotor();
   ArmLeader = OpenBicepMotor->Open(arm1);
   //OpenBicepMotor->Invert = true;
+  ArmLeader->SetSelectedSensorPosition(0,0,50);
   ArmFollower = OpenBicepMotor->Open(arm2);
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
   ArmLeader->Config_kP(0, armP, 0);
@@ -36,6 +37,7 @@ void Bicep::BicepStretch(){
 void Bicep::Rotato(double joystick) {
     double stayPut = 0;
     double currentPosition = ArmLeader->GetSelectedSensorPosition(0);
+    
     if (joystick == 0){
      if (abs(currentPosition) > armCramps)
      {
@@ -46,10 +48,17 @@ void Bicep::Rotato(double joystick) {
       stayPut = 0;
   }
   ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3 + stayPut);
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
+  
 }
 void Bicep::BicepCurl(double setPoint){
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,setPoint);
+  if (abs(abs(ArmLeader->GetSelectedSensorPosition(0)) - setPoint) < armError)
+  {
+    ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
+  }
+  else{
+     ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,setPoint);
+  }
+ 
 }
 bool Bicep::WeighIn(double setPoint){
   if ((Robot::m_oi.ReturnManualLeftYAxis() != 0) || (Robot::m_oi.ReturnManualRightYAxis() != 0)) {
@@ -57,7 +66,9 @@ bool Bicep::WeighIn(double setPoint){
   }
   return (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError);
 }
-
+double Bicep::ReturnBicepEncoder(){
+  return ArmLeader->GetSelectedSensorPosition(0);
+}
 void Bicep::InitDefaultCommand() {
   if (!initialized)
   {

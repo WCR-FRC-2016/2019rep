@@ -9,6 +9,7 @@
 #include "subsystems/DoWeEvenLift.h"
 #include "OI.h"
 #include "Robot.h"
+#include "RobotMap.h"
 DeadLift::DeadLift() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
@@ -22,8 +23,24 @@ void DeadLift::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void DeadLift::Execute() {
+  if (Robot::m_oi.ReturnManualXButton()){
+    if (Robot::m_bicep.ReturnBicepEncoder() < 0){
+      Robot::m_doweevenlift.ChonkySquat(liftCollect);  
+    }
+    else{
+      Robot::m_doweevenlift.ChonkySquat(liftHab);
+    }
+  }
+  else if (Robot::m_oi.ReturnManualYButton()){
+      Robot::m_doweevenlift.ChonkySquat(liftMid);
+      Robot::m_bicep.BicepCurl(armMid * abs(Robot::m_bicep.ReturnBicepEncoder())/Robot::m_bicep.ReturnBicepEncoder());
+  }
+  else
+  {
     Robot::m_doweevenlift.Lift(Robot::m_oi.ReturnManualLeftYAxis());
+  }
 }
+
 
 // Make this return true when this Command no longer needs to run execute()
 bool DeadLift::IsFinished() { return false; }

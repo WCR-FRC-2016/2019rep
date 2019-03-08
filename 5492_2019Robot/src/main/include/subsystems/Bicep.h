@@ -21,4 +21,5 @@ class Bicep : public frc::Subsystem {
   void BicepCurl(double setPoint);
   bool WeighIn(double setPoint);
   void InitDefaultCommand() override;
+  double ReturnBicepEncoder();
 };

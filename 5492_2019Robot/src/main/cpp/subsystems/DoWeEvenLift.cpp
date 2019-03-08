@@ -29,21 +29,27 @@ void DoWeEvenLift::LiftInit() {
     OpenLiftMotor->Invert = true;
     LiftFollower = OpenLiftMotor->Open(lift2);
     LiftFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, lift1);
+    LiftLeader->SetSelectedSensorPosition(0,0,50);
     LiftLeader->Config_kP(0, liftP, 0);
     LiftLeader->Config_kI(0, liftI, 0);
     LiftLeader->Config_kD(0, liftD, 0);
 }
 void DoWeEvenLift::Lift(double joystick){
   if (joystick > 0){
-    joystick = joystick / 3;
+    joystick = joystick / 1.333;
   }
   else {
-    joystick = joystick / 3;
+    joystick = joystick / 1.333;
   }
   LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, joystick);
 }
 void DoWeEvenLift::ChonkySquat(double setPoint){
+    if  (abs (abs(LiftLeader->GetSelectedSensorPosition(0)) - abs(setPoint)) > liftError){
+      
+      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
+    }
     LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, setPoint);
+    
 }
 bool DoWeEvenLift::WeighIn(double setPoint){
   if ((Robot::m_oi.ReturnManualLeftYAxis() != 0) || (Robot::m_oi.ReturnManualRightYAxis() != 0)) {

@@ -172,9 +172,9 @@ Minx|			 \
  
 
 
-	parsedX = xAxis; //pow((xAxis>0)?xAxis:-xAxis, power) * (xAxis / (xAxis>0)?xAxis:-xAxis);
+	parsedX = xAxis *speed; //pow((xAxis>0)?xAxis:-xAxis, power) * (xAxis / (xAxis>0)?xAxis:-xAxis);
 
-	parsedY = pow((yAxis>0)?yAxis:-yAxis, power) * (yAxis / (yAxis>0)?yAxis:-yAxis) * driveConstant;
+	parsedY = pow((yAxis>0)?yAxis:-yAxis, power) * (yAxis / (yAxis>0)?yAxis:-yAxis) * driveConstant * speed;
 
 	if (yAxis < 0)
 	{
@@ -215,6 +215,19 @@ void DriveBase::reverseDrive (bool bButton) {
 if (bButton) {
 	driveConstant = driveConstant * -1;
 }
+}
+void DriveBase::slowDrive (bool yButton) {
+	if (yButton){
+		if (speed == 1)
+		{
+			speed = .5;
+		}
+		else
+		{
+			speed = 1;
+		}
+		
+	}
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
