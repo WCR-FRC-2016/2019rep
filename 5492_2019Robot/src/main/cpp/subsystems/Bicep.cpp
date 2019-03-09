@@ -39,7 +39,7 @@ void Bicep::Rotato(double joystick) {
     double currentPosition = ArmLeader->GetSelectedSensorPosition(0);
     
     if (joystick == 0){
-     if (abs(currentPosition) > armCramps)
+     if (abs(currentPosition) > armCramps && armFree > abs(currentPosition))
      {
        stayPut = armStopIt * (abs(currentPosition)/currentPosition);
       }

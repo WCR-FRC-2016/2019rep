@@ -58,6 +58,7 @@ const double armError = 50;
 const double armStopIt = -.115; //JOYSTICk value to put in forwads
 const double armCramps = 1750;//position at which we want to start stalling
 //3200
+const double armFree = 3800;
 
 const double RightP = 0.0678;
 const double RightI = 6.78E-6;
