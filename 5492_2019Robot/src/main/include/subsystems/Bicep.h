@@ -14,6 +14,7 @@ class Bicep : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
   bool initialized = false;
+  bool something = false;
  public:
   Bicep();
   void BicepStretch();
@@ -22,4 +23,6 @@ class Bicep : public frc::Subsystem {
   bool WeighIn(double setPoint);
   void InitDefaultCommand() override;
   double ReturnBicepEncoder();
+  double currentPosition = 0;
+  
 };

@@ -35,19 +35,32 @@ void DoWeEvenLift::LiftInit() {
     LiftLeader->Config_kD(0, liftD, 0);
 }
 void DoWeEvenLift::Lift(double joystick){
-  if (joystick > 0){
-    joystick = joystick / 1.333;
-  }
-  else {
-    joystick = joystick / 1.333;
-  }
-  LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, joystick);
+  if (joystick == 0){
+       if (something){
+         currentPosition = LiftLeader->GetSelectedSensorPosition(0);
+         something = false;
+       }
+        LiftLeader->Config_kP(0, liftManP, 0);
+        LiftLeader->Config_kI(0, liftManI, 0);
+        LiftLeader->Config_kD(0, liftManD, 0);
+        LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,currentPosition);
+   }
+    else{
+      something = true;
+      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/1.333);
+    }
 }
 void DoWeEvenLift::ChonkySquat(double setPoint){
+    LiftLeader->Config_kP(0, armP, 0);
+    LiftLeader->Config_kI(0, armI, 0);
+    LiftLeader->Config_kD(0, armD, 0);
     if  (abs (abs(LiftLeader->GetSelectedSensorPosition(0)) - abs(setPoint)) > liftError){
-      
-      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
+      something = true;
+      currentPosition = LiftLeader->GetSelectedSensorPosition(0);
+      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, setPoint);
     }
+    something = true;
+    currentPosition = LiftLeader->GetSelectedSensorPosition(0);  
     LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, setPoint);
     
 }

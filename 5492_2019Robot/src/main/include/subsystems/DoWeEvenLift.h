@@ -14,7 +14,7 @@ class DoWeEvenLift : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
   bool liftInitialized = false;
-
+  bool something = false;
  public:
   DoWeEvenLift();
   void LiftInit();
@@ -22,4 +22,5 @@ class DoWeEvenLift : public frc::Subsystem {
   void ChonkySquat(double position);
   bool WeighIn(double setPoint);
   void InitDefaultCommand() override;
+  double currentPosition = 0;
 };

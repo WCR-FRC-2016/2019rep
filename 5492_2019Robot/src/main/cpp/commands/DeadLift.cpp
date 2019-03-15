@@ -25,10 +25,12 @@ void DeadLift::Initialize() {
 void DeadLift::Execute() {
   if (Robot::m_oi.ReturnManualXButton()){
     if (Robot::m_bicep.ReturnBicepEncoder() < 0){
-      Robot::m_doweevenlift.ChonkySquat(liftCollect);  
+      Robot::m_doweevenlift.ChonkySquat(liftCollect);
+      Robot::m_bicep.BicepCurl(armHab * abs(Robot::m_bicep.ReturnBicepEncoder())/Robot::m_bicep.ReturnBicepEncoder());
     }
     else{
       Robot::m_doweevenlift.ChonkySquat(liftHab);
+      Robot::m_bicep.BicepCurl(armHab * abs(Robot::m_bicep.ReturnBicepEncoder())/Robot::m_bicep.ReturnBicepEncoder());
     }
   }
   else if (Robot::m_oi.ReturnManualYButton()){

@@ -25,8 +25,9 @@ Bicep::Bicep() : Subsystem("Bicep") {}
 void Bicep::BicepStretch(){
   initialized = true;
   OpenOneMotor* OpenBicepMotor =  new OpenOneMotor();
+
   ArmLeader = OpenBicepMotor->Open(arm1);
-  //OpenBicepMotor->Invert = true;
+ 
   ArmLeader->SetSelectedSensorPosition(0,0,50);
   ArmFollower = OpenBicepMotor->Open(arm2);
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
@@ -35,27 +36,38 @@ void Bicep::BicepStretch(){
   ArmLeader->Config_kD(0, armD, 0);
 }
 void Bicep::Rotato(double joystick) {
-    double stayPut = 0;
-    double currentPosition = ArmLeader->GetSelectedSensorPosition(0);
     
-    if (joystick == 0){
-     if (abs(currentPosition) > armCramps && armFree > abs(currentPosition))
-     {
-       stayPut = armStopIt * (abs(currentPosition)/currentPosition);
-      }
-    }
+    
+     if (joystick == 0){
+       if (something){
+         currentPosition = ArmLeader->GetSelectedSensorPosition(0);
+         something = false;
+       }
+        ArmLeader->Config_kP(0, armManP, 0);
+        ArmLeader->Config_kI(0, armManI, 0);
+        ArmLeader->Config_kD(0, armManD, 0);
+        ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,currentPosition);
+   }
     else{
-      stayPut = 0;
-  }
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3 + stayPut);
+      something = true;
+      ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
+    }
+  
   
 }
 void Bicep::BicepCurl(double setPoint){
+  ArmLeader->Config_kP(0, armP, 0);
+  ArmLeader->Config_kI(0, armI, 0);
+  ArmLeader->Config_kD(0, armD, 0);
   if (abs(abs(ArmLeader->GetSelectedSensorPosition(0)) - setPoint) < armError)
   {
-    ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput, 0);
+    something = true;
+    currentPosition = ArmLeader->GetSelectedSensorPosition(0);
+    ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, currentPosition);
   }
   else{
+    something = true;
+    currentPosition = ArmLeader->GetSelectedSensorPosition(0);
      ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,setPoint);
   }
  

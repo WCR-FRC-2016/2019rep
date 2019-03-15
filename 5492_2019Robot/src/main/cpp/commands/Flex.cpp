@@ -20,7 +20,7 @@ void Flex::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void Flex::Execute() {
-  Robot::m_bicep.Rotato(Robot::m_oi.ReturnManualRightYAxis());
+  Robot::m_bicep.Rotato(-Robot::m_oi.ReturnManualRightYAxis());
 }
 
 // Make this return true when this Command no longer needs to run execute()
