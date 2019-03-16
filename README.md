@@ -1,20 +1,4 @@
 # 2019rep
-## Subsystems:
-    Bicep: Arm control
-        int Function (bool): Does this and or other details
-    CargoClaw: Cargo manipulator
-    DoWeEvenLift: Eleveator/Lift to move arm up and down
-    DriveBase: Drive train
-    HatchHarpoon: Hatch manipulator
-## Commands:
-    BicepCurl:
-    CargoClawCommand:
-    CleanAndJerk:
-    DeadLift:
-    FirmlyGraspIt:
-    Flex:
-    SpearedWhale:
-    SpotMe:
-    TanksDrive:
-    
-  
+Visit our Wiki for details on 2019 Winner's Circle Robotics Code
+
+https://github.com/WCR-FRC-2016/2019rep/wiki
