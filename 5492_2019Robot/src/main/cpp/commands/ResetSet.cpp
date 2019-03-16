@@ -4,31 +4,31 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-#include "commands/Flex.h"
 #include "Robot.h"
-#include "OI.h"
+#include "commands/ResetSet.h"
 
-Flex::Flex() {
+ResetSet::ResetSet() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
+  Requires(&Robot::m_doweevenlift);
   Requires(&Robot::m_bicep);
 }
 
 // Called just before this Command runs the first time
-void Flex::Initialize() {}
+void ResetSet::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void Flex::Execute() {
-  Robot::m_bicep.Rotato(-Robot::m_oi.ReturnManualRightYAxis()); // remove '-' for knoxville on R1
+void ResetSet::Execute() {
+  Robot::m_doweevenlift.ResetSomething();
+  Robot::m_bicep.ResetSomething();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Flex::IsFinished() { return false; }
+bool ResetSet::IsFinished() { return true; }
 
 // Called once after isFinished returns true
-void Flex::End() {}
+void ResetSet::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Flex::Interrupted() {}
+void ResetSet::Interrupted() {}

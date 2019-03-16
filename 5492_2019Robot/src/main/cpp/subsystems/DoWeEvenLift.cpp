@@ -50,6 +50,13 @@ void DoWeEvenLift::Lift(double joystick){
       LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/1.333);
     }
 }
+
+void DoWeEvenLift::ResetSomething()
+{
+  something = true;
+}
+
+
 void DoWeEvenLift::ChonkySquat(double setPoint){
     LiftLeader->Config_kP(0, armP, 0);
     LiftLeader->Config_kI(0, armI, 0);

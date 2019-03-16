@@ -35,6 +35,10 @@ void Bicep::BicepStretch(){
   ArmLeader->Config_kI(0, armI, 0);
   ArmLeader->Config_kD(0, armD, 0);
 }
+void Bicep::ResetSomething()
+{
+  something = true;
+}
 void Bicep::Rotato(double joystick) {
     
     

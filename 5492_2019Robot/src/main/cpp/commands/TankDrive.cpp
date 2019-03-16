@@ -34,14 +34,14 @@ void TankDrive::Execute() {
     Robot::m_drivebase.RampSwitch(false);
     double Kp = 0.0095;
     double adjust = 0;
-    double min_command = .35;
+    double min_command = 0;
     double* visionArray = Robot::m_oi.ReturnVisionX();
     double offset = visionArray[0];
     double area = visionArray[1];
-    double farKP = 0.0095;
-    double closeKP = 0.03;
-    double farArea = 6.5;
-    double closeArea = 0.03;
+    double farKP = 0.1;
+    double closeKP = 0.0285;
+    double farArea = 0.07;
+    double closeArea = 3.8;
     double Kpa = (farKP-closeKP)/(farArea-closeArea); //(Far away Kp - Close Kp)/ (Far away area - Up close area)
     bool* lightArray = Robot::m_oi.ReturnLightSensors();
     frc::SmartDashboard::PutBoolean("LightSensor1", lightArray[0]);
@@ -58,7 +58,7 @@ Close KP|--\
         |  |  \
         |  |   \
         |  |    \
-        |  |     \
+        |  |     \                                                                                                                                          
 Far KP  |--|----- \
         |  |      |\
         |  |      | \
@@ -71,7 +71,9 @@ Far KP  |--|----- \
     Kp = Kpa * area - Kpa * closeArea + closeKP; // Kp = Kpa * area - Kpa * Close area + Close Kp
     double forwardBack = -Robot::m_oi.ReturnDriverYAxis();
     if (area == 0) {
-      if ((lightArray[0] && lightArray[1])){ // 0 is left 1 is right, true = Don't see line, false = I see something
+      adjust = 0;
+    
+      /*if ((lightArray[0] && lightArray[1])){ // 0 is left 1 is right, true = Don't see line, false = I see something
         if (!Isee){  // No line seen
           forwardBack = 0.0;
           if (prevError > 0){ // turn right
@@ -94,7 +96,7 @@ Far KP  |--|----- \
         adjust = 0.5;
         }
       }
-      
+      */
       /*if (lightArray[0]){
         adjust = 0.5;
       }
@@ -123,7 +125,7 @@ Far KP  |--|----- \
   }
   else{
     Robot::m_drivebase.RampSwitch(true);
-    Robot::m_oi.SwapLedMode(1);
+    Robot::m_oi.SwapLedMode(3);
     Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
     Isee = false;
   }

@@ -89,7 +89,7 @@ void Robot::AutonomousInit() {
   // }
 
   m_autonomousCommand = m_chooser.GetSelected();
-
+  m_resetSet->Start();
   if (m_autonomousCommand != nullptr) {
     m_autonomousCommand->Start();
   }
@@ -102,6 +102,7 @@ void Robot::TeleopInit() {
   // teleop starts running. If you want the autonomous to
   // continue until interrupted by another command, remove
   // this line or comment it out.
+  m_resetSet->Start();
   if (m_autonomousCommand != nullptr) {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;

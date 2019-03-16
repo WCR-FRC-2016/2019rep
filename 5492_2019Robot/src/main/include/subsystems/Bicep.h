@@ -20,6 +20,7 @@ class Bicep : public frc::Subsystem {
   void BicepStretch();
   void Rotato(double joystick);
   void BicepCurl(double setPoint);
+  void ResetSomething();
   bool WeighIn(double setPoint);
   void InitDefaultCommand() override;
   double ReturnBicepEncoder();
