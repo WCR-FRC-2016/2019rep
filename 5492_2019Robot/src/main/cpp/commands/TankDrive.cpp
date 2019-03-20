@@ -32,17 +32,24 @@ void TankDrive::Execute() {
   {
     Robot::m_oi.SwapLedMode(3);
     Robot::m_drivebase.RampSwitch(false);
+    double CornerProptionalConstant = 0;
     double Kp = 0.0095;
+    
     double adjust = 0;
     double min_command = 0;
     double* visionArray = Robot::m_oi.ReturnVisionX();
     double offset = visionArray[0];
     double area = visionArray[1];
+    double cornerDiff = visionArray[2];
     double farKP = 0.1;
     double closeKP = 0.0285;
     double farArea = 0.07;
     double closeArea = 3.8;
     double Kpa = (farKP-closeKP)/(farArea-closeArea); //(Far away Kp - Close Kp)/ (Far away area - Up close area)
+    double CornerKp = 0;
+    double closeCornerKp = 0.025;
+    double farCornerKp = 0.1;
+    double Kpc = (farCornerKp - closeCornerKp)/(farArea-closeArea);
     bool* lightArray = Robot::m_oi.ReturnLightSensors();
     frc::SmartDashboard::PutBoolean("LightSensor1", lightArray[0]);
 
@@ -68,7 +75,8 @@ Far KP  |--|----- \
           Area   Area
     */
 
-    Kp = Kpa * area - Kpa * closeArea + closeKP; // Kp = Kpa * area - Kpa * Close area + Close Kp
+    Kp = Kpa * area - Kpa * closeArea + closeKP;
+    CornerKp = Kpc * area - Kpc * closeArea + closeCornerKp; // Kp = Kpa * area - Kpa * Close area + Close Kp
     double forwardBack = -Robot::m_oi.ReturnDriverYAxis();
     if (area == 0) {
       adjust = 0;
@@ -118,7 +126,9 @@ Far KP  |--|----- \
       {
         adjust = Kp * offset - min_command;
       }
+      adjust = adjust - (CornerKp * cornerDiff);
     }
+    
     Robot::m_drivebase.ArcadeDrive((Robot::m_oi.ReturnDriverYAxis()<=0)?adjust:-adjust, forwardBack);
     frc::SmartDashboard::PutNumber("Vision Adjustment", adjust);
     prevError = offset;

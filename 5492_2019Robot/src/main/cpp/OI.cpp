@@ -18,6 +18,8 @@
 #include "RobotMap.h"
 #include "commands/FirmlyGraspIt.h"
 #include "commands/CargoClawCommand.h"
+#include "VisionerCornerFinder.h"
+#include <vector>
 	
 	 
 OI::OI() {
@@ -108,6 +110,11 @@ double* OI::ReturnVisionX(){
 	targetArea = table->GetNumber("ta",0.0);
 	visionData[0] = targetOffsetAngle_Horizontal;
 	visionData[1] = targetArea;
+
+	xCorners = table->GetNumberArray("tcornx", {0.0,0.0,0.0,0.0});
+	yCorners = table->GetNumberArray("tcorny", {0.0,0.0,0.0,0.0});
+	VisionerCornerFinder* CornerFinder = new VisionerCornerFinder();
+	visionData[2] = CornerFinder->LostandFound(xCorners, yCorners);
 	return visionData;
 }
 bool* OI::ReturnLightSensors() {
