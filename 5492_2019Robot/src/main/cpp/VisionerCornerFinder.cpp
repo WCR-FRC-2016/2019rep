@@ -11,7 +11,7 @@
 VisionerCornerFinder::VisionerCornerFinder() {
 
 }
-double LostandFound(std::vector<double>  xArray, std::vector<double> yArray){
+double VisionerCornerFinder::LostandFound(std::vector<double>  xArray, std::vector<double> yArray){
     std::vector<double> copyYArray = yArray;
     int maxIndex = 0;
     int maxIndexi[4];
