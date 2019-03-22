@@ -59,7 +59,7 @@ void Bicep::Rotato(double joystick) {
   
   
 }
-void Bicep::BicepCurl(double setPoint){
+void Bicep::BicepCurl(double setPoint){  
   ArmLeader->Config_kP(0, armP, 0);
   ArmLeader->Config_kI(0, armI, 0);
   ArmLeader->Config_kD(0, armD, 0);
@@ -78,7 +78,6 @@ void Bicep::BicepCurl(double setPoint){
  
 }
 bool Bicep::WeighIn(double setPoint){
-  
   return (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError);
 }
 double Bicep::ReturnBicepEncoder(){

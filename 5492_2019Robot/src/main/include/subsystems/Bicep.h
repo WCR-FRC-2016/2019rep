@@ -15,6 +15,7 @@ class Bicep : public frc::Subsystem {
   // for methods that implement subsystem capabilities
   bool initialized = false;
   bool something = false;
+
  public:
   Bicep();
   void BicepStretch();

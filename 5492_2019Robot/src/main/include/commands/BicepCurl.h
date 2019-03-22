@@ -20,4 +20,5 @@ class BicepCurl : public frc::Command {
   void Interrupted() override;
 private:
   double setPoint;
+  bool firstTime = true;
 };

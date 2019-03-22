@@ -16,6 +16,7 @@ CleanAndJerk::CleanAndJerk(double setPoint[2]) {
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
   // these will run in order.
+  
     AddSequential(new SpotMe(0));
     AddSequential(new BicepCurl(setPoint[0]));
     AddSequential(new SpotMe(setPoint[1]));
