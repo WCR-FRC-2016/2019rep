@@ -13,10 +13,13 @@ Flex::Flex() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_bicep);
+  Flex::SetInterruptible(true);
 }
 
 // Called just before this Command runs the first time
-void Flex::Initialize() {}
+void Flex::Initialize() {
+  
+}
 
 // Called repeatedly when this Command is scheduled to run
 void Flex::Execute() {

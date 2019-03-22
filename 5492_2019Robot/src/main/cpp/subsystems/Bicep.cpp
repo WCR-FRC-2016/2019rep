@@ -63,7 +63,8 @@ void Bicep::BicepCurl(double setPoint){
   ArmLeader->Config_kP(0, armP, 0);
   ArmLeader->Config_kI(0, armI, 0);
   ArmLeader->Config_kD(0, armD, 0);
-  if (abs(abs(ArmLeader->GetSelectedSensorPosition(0)) - setPoint) < armError)
+ 
+  if (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError)
   {
     something = true;
     currentPosition = ArmLeader->GetSelectedSensorPosition(0);
@@ -77,9 +78,7 @@ void Bicep::BicepCurl(double setPoint){
  
 }
 bool Bicep::WeighIn(double setPoint){
-  if ((Robot::m_oi.ReturnManualLeftYAxis() != 0) || (Robot::m_oi.ReturnManualRightYAxis() != 0)) {
-    frc::Scheduler::GetInstance()->RemoveAll();
-  }
+  
   return (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError);
 }
 double Bicep::ReturnBicepEncoder(){

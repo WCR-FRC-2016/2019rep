@@ -10,6 +10,7 @@
 #include "commands/BicepCurl.h"
 #include "commands/DeadLift.h"
 #include "commands/Flex.h"
+#include "commands/ResetSet.h"
 CleanAndJerk::CleanAndJerk(double setPoint[2]) {
   // Add Commands here:
   // e.g. AddSequential(new Command1());
@@ -18,6 +19,7 @@ CleanAndJerk::CleanAndJerk(double setPoint[2]) {
     AddSequential(new SpotMe(0));
     AddSequential(new BicepCurl(setPoint[0]));
     AddSequential(new SpotMe(setPoint[1]));
+    AddSequential(new ResetSet());
     AddParallel(new Flex());
     AddSequential(new DeadLift());
 

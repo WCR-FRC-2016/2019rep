@@ -14,17 +14,17 @@ DeadLift::DeadLift() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_doweevenlift);
-  Requires(&Robot::m_bicep);
+  DeadLift::SetInterruptible(true);
 }
 
 // Called just before this Command runs the first time
 void DeadLift::Initialize() {
-  Robot::m_doweevenlift.LiftInit();
+  
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DeadLift::Execute() {
-  if (Robot::m_oi.ReturnManualXButton()){
+  /*if (Robot::m_oi.ReturnManualXButton()){
     if (Robot::m_bicep.ReturnBicepEncoder() < 0){
       Robot::m_doweevenlift.ChonkySquat(liftCollect);
       Robot::m_bicep.BicepCurl(armHab * abs(Robot::m_bicep.ReturnBicepEncoder())/Robot::m_bicep.ReturnBicepEncoder());
@@ -42,6 +42,8 @@ void DeadLift::Execute() {
   {
     Robot::m_doweevenlift.Lift(Robot::m_oi.ReturnManualLeftYAxis());
   }
+  */
+  Robot::m_doweevenlift.Lift(Robot::m_oi.ReturnManualLeftYAxis());
 }
 
 

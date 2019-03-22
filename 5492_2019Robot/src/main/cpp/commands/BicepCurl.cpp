@@ -15,13 +15,18 @@ BicepCurl::BicepCurl(double position) {
   Requires(&Robot::m_bicep);
   BicepCurl::SetInterruptible(true);
   setPoint = position;
+  setPoint = setPoint * abs(Robot::m_bicep.ReturnBicepEncoder())/Robot::m_bicep.ReturnBicepEncoder();
+  
 }
 
 // Called just before this Command runs the first time
-void BicepCurl::Initialize() {}
+void BicepCurl::Initialize() {
+   
+}
 
 // Called repeatedly when this Command is scheduled to run
 void BicepCurl::Execute() {
+  
   Robot::m_bicep.BicepCurl(setPoint);
 
 }
@@ -34,6 +39,7 @@ bool BicepCurl::IsFinished() {
 
 // Called once after isFinished returns true
 void BicepCurl::End() {
+
   Robot::m_bicep.Rotato(0);
 }
  
@@ -42,6 +48,6 @@ void BicepCurl::End() {
 void BicepCurl::Interrupted()
   
  {
- frc::Scheduler::GetInstance()->RemoveAll();
+ 
  
 }
