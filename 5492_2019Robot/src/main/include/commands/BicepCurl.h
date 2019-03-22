@@ -11,7 +11,7 @@
 
 class BicepCurl : public frc::Command {
  public:
-  BicepCurl(double postition);
+  BicepCurl(int postition);
   
   void Initialize() override;
   void Execute() override;
@@ -19,6 +19,6 @@ class BicepCurl : public frc::Command {
   void End() override;
   void Interrupted() override;
 private:
-  double setPoint;
+  int setPoint;
   bool firstTime = true;
 };

@@ -28,11 +28,11 @@ const double liftManP = 0.1;
 const double liftManI = 0;
 const double liftManD = 0;
 
-const double liftHab = -4700.0;
-const double liftCollect = -4300.0;
-const double liftLow = 0;
-const double liftMid = -21039.0;
-const double liftError = 50;
+const int liftHab = -4700;
+const int liftCollect = -4300;
+const int liftLow = 0;
+const int liftMid = -21039;
+const int liftError = 50;
 //Pneumatics
 const int harpoon = 4;
 
@@ -57,10 +57,10 @@ const double armManP = 0.650;
 const double armManI = 0;
 const double armManD = 0;
 
-const double armHab = 3577;
-const double armLow = 3577;
-const double armMid = 2825;
-const double armError = 50;
+const int armHab = 3577;
+const int armLow = 3577;
+const int armMid = 2825;
+const int armError = 50;
 
 const double armStopIt = -.115; //JOYSTICk value to put in forwads
 const double armCramps = 1750;//position at which we want to start stalling

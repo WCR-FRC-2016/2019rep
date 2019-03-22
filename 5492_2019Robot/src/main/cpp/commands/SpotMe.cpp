@@ -10,7 +10,7 @@
 #include "frc/commands/Scheduler.h"
 #include "RobotMap.h"
 
-SpotMe::SpotMe(double position) {
+SpotMe::SpotMe(int position) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_doweevenlift);

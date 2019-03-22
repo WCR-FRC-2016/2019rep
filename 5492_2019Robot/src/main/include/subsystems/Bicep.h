@@ -20,11 +20,11 @@ class Bicep : public frc::Subsystem {
   Bicep();
   void BicepStretch();
   void Rotato(double joystick);
-  void BicepCurl(double setPoint);
+  void BicepCurl(int setPoint);
   void ResetSomething();
-  bool WeighIn(double setPoint);
+  bool WeighIn(int setPoint);
   void InitDefaultCommand() override;
   double ReturnBicepEncoder();
-  double currentPosition = 0;
+  int currentPosition = 0;
   
 };

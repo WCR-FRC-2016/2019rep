@@ -11,12 +11,12 @@
 
 class SpotMe : public frc::Command {
  public:
-  SpotMe(double position);
+  SpotMe(int position);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
 private:
-  double setPoint;
+  int setPoint;
 };

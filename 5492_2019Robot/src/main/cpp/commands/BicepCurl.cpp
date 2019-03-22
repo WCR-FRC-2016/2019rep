@@ -9,7 +9,7 @@
 #include "Robot.h"
 #include "RobotMap.h"
 
-BicepCurl::BicepCurl(double position) {
+BicepCurl::BicepCurl(int position) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_bicep);

@@ -43,7 +43,7 @@ void DoWeEvenLift::Lift(double joystick){
         LiftLeader->Config_kP(0, liftManP, 0);
         LiftLeader->Config_kI(0, liftManI, 0);
         LiftLeader->Config_kD(0, liftManD, 0);
-        LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,currentPosition);
+        LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,static_cast<double>(currentPosition));
    }
     else{
       something = true;
@@ -57,22 +57,22 @@ void DoWeEvenLift::ResetSomething()
 }
 
 
-void DoWeEvenLift::ChonkySquat(double setPoint){
+void DoWeEvenLift::ChonkySquat(int setPoint){
     LiftLeader->Config_kP(0, armP, 0);
     LiftLeader->Config_kI(0, armI, 0);
     LiftLeader->Config_kD(0, armD, 0);
     if  (abs (abs(LiftLeader->GetSelectedSensorPosition(0)) - abs(setPoint)) < liftError){
       something = true;
       currentPosition = LiftLeader->GetSelectedSensorPosition(0);
-      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, currentPosition);
+      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, static_cast<double>(currentPosition));
     }
     else{
       something = true;
       currentPosition = LiftLeader->GetSelectedSensorPosition(0);  
-      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, setPoint);
+      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, static_cast<double>(setPoint));
     }
 }
-bool DoWeEvenLift::WeighIn(double setPoint){
+bool DoWeEvenLift::WeighIn(int setPoint){
   bool placeHolder = (setPoint == 0 && LiftLeader->GetSensorCollection().IsFwdLimitSwitchClosed());
   return ((abs(LiftLeader->GetSelectedSensorPosition(0) - setPoint) < liftError) || placeHolder );
 }

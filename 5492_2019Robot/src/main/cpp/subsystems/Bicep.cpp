@@ -50,7 +50,7 @@ void Bicep::Rotato(double joystick) {
         ArmLeader->Config_kP(0, armManP, 0);
         ArmLeader->Config_kI(0, armManI, 0);
         ArmLeader->Config_kD(0, armManD, 0);
-        ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,currentPosition);
+        ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,static_cast<double>(currentPosition));
    }
     else{
       something = true;
@@ -59,7 +59,7 @@ void Bicep::Rotato(double joystick) {
   
   
 }
-void Bicep::BicepCurl(double setPoint){  
+void Bicep::BicepCurl(int setPoint){  
   ArmLeader->Config_kP(0, armP, 0);
   ArmLeader->Config_kI(0, armI, 0);
   ArmLeader->Config_kD(0, armD, 0);
@@ -68,16 +68,16 @@ void Bicep::BicepCurl(double setPoint){
   {
     something = true;
     currentPosition = ArmLeader->GetSelectedSensorPosition(0);
-    ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, currentPosition);
+    ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, static_cast<double>(currentPosition));
   }
   else{
     something = true;
     currentPosition = ArmLeader->GetSelectedSensorPosition(0);
-     ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,setPoint);
+     ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,static_cast<double>(setPoint));
   }
  
 }
-bool Bicep::WeighIn(double setPoint){
+bool Bicep::WeighIn(int setPoint){
   return (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError);
 }
 double Bicep::ReturnBicepEncoder(){

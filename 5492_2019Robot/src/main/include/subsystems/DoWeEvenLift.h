@@ -20,8 +20,8 @@ class DoWeEvenLift : public frc::Subsystem {
   void LiftInit();
   void ResetSomething();
   void Lift(double joystick);
-  void ChonkySquat(double position);
-  bool WeighIn(double setPoint);
+  void ChonkySquat(int position);
+  bool WeighIn(int setPoint);
   void InitDefaultCommand() override;
-  double currentPosition = 0;
+  int currentPosition = 0;
 };
