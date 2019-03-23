@@ -18,6 +18,9 @@
 #include "RobotMap.h"
 #include "commands/FirmlyGraspIt.h"
 #include "commands/CargoClawCommand.h"
+#include "VisionerCornerFinder.h"
+#include <vector>
+#include "subsystems/Bicep.h"
 	
 	 
 OI::OI() {
@@ -39,16 +42,17 @@ void OI::OIInit(){
 	}
 	LightSensorZero = new frc::DigitalInput(0);
 	LightSensorOne = new frc::DigitalInput(1);
-	//manButtonX = new frc::JoystickButton(_manualStick, 3);
-	//manButtonY = new frc::JoystickButton(_manualStick, 4);
-	//manButtonB = new frc::JoystickButton(_manualStick, 2);
+	manButtonX = new frc::JoystickButton(_manualStick, 3);
+	manButtonY = new frc::JoystickButton(_manualStick, 4);
+	manButtonB = new frc::JoystickButton(_manualStick, 2);
 	//manButtonA = new frc::JoystickButton(_manualStick, 1);
 	double habLevel[2] = {armHab, liftHab};
-	double lowLevel[2] = {armLow, liftLow};
+	double lowLevel[2] = {armLow, liftLow}; // this doesn't exist
 	double midLevel[2] = {armMid, liftMid};
-	//manButtonX->ToggleWhenPressed(new CleanAndJerk(habLevel));
-	//manButtonY->ToggleWhenPressed(new CleanAndJerk(midLevel));
-	//manButtonB->ToggleWhenPressed(new CleanAndJerk(lowLevel));
+	double reverseLevel[2] = {-armHab, liftHab};
+	manButtonX->WhileHeld(new CleanAndJerk(habLevel));
+	manButtonY->WhileHeld(new CleanAndJerk(midLevel));
+	manButtonB->WhileHeld(new CleanAndJerk(reverseLevel));
 	//manSelect->WhileHeld(new FirmlyGrasp(-manHarpoon));
 	//manStart->WhileHeld(new FirmlyGrasp(manHarpoon));
 	
@@ -57,7 +61,9 @@ void OI::OIInit(){
 bool OI::ReturnDriverBButton() {
 	return _driverStick->GetBButtonPressed();
 }
-
+bool OI::ReturnDriverYButton(){
+	return _driverStick->GetYButtonPressed();
+}
 double OI::ReturnDriverXAxis(){
 	return DeadBand(_driverStick->GetX(frc::GenericHID::kRightHand));
 
@@ -106,6 +112,12 @@ double* OI::ReturnVisionX(){
 	targetArea = table->GetNumber("ta",0.0);
 	visionData[0] = targetOffsetAngle_Horizontal;
 	visionData[1] = targetArea;
+
+	xCorners = table->GetNumberArray("tcornx", {1.0,0.0,0.0,0.0});
+	yCorners = table->GetNumberArray("tcorny", {1.0,0.0,0.0,0.0});
+	VisionerCornerFinder* CornerFinder = new VisionerCornerFinder();
+	visionData[2] = CornerFinder->LostandFound(xCorners, yCorners);
+	printf("Diff=%f\n",visionData[2]);
 	return visionData;
 }
 bool* OI::ReturnLightSensors() {
@@ -118,13 +130,16 @@ bool OI::ReturnManualAButton() {
 	return _manualStick->GetAButtonPressed();
 }
 bool OI::ReturnManualXButton(){
+	if (_manualStick->GetXButtonReleased()){
+	frc::Scheduler::GetInstance()->RemoveAll();
+	}
 	return _manualStick->GetXButton();
 }
 bool OI::ReturnManualYButton() {
-	return _manualStick->GetYButtonPressed();	
+	return _manualStick->GetYButton();	
 }
 bool OI::ReturnManualBButton() {
-	return _manualStick->GetBButtonPressed();	
+	return _manualStick->GetBButton();	
 }
 
 

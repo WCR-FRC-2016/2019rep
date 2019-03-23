@@ -18,17 +18,21 @@ const int RampTime = .5;
 const int cargoClaw = 5;
 
 //Elevator
-const int lift1 = 3;//should be 2 , r2 is swapped
-const int lift2 = 2;
+const int lift1 = 2;//should be 2 , r2 is swapped
+const int lift2 = 3;
 
-const double liftP = 0;
+const double liftP = 0.12;//.12
 const double liftI = 0;
 const double liftD = 0;
+const double liftManP = 0.1;
+const double liftManI = 0;
+const double liftManD = 0;
 
-const double liftHab = 0;
-const double liftLow = 0;
-const double liftMid = 0;
-const double liftError = 0;
+const int liftHab = -4700;
+const int liftCollect = -4300;
+const int liftLow = 0;
+const int liftMid = -21039;
+const int liftError = 50;
 //Pneumatics
 const int harpoon = 4;
 
@@ -45,15 +49,23 @@ const double harpoonD = 0;
 const int arm1 = 12;
 const int arm2 = 13;
 
-const double armP = 0;
+const double armIncrement = 1;
+const double armP = 0.1625;
 const double armI = 0;
 const double armD = 0;
+const double armManP = 0.650;
+const double armManI = 0;
+const double armManD = 0;
 
-const double armHab = 0;
-const double armLow = 0;
-const double armMid = 0;
-const double armError = 0;
+const int armHab = 3577;
+const int armLow = 3577;
+const int armMid = 2825;
+const int armError = 50;
 
+const double armStopIt = -.115; //JOYSTICk value to put in forwads
+const double armCramps = 1750;//position at which we want to start stalling
+//3200
+const double armFree = 3800;
 
 const double RightP = 0.0678;
 const double RightI = 6.78E-6;

@@ -18,33 +18,71 @@
 #include <ctre/Phoenix.h>
 #include <OpenOneMotor.h>
 #include "commands/Flex.h"
+#include "RobotMap.h"
 WPI_TalonSRX* ArmLeader;
 WPI_TalonSRX* ArmFollower;
 Bicep::Bicep() : Subsystem("Bicep") {}
 void Bicep::BicepStretch(){
   initialized = true;
   OpenOneMotor* OpenBicepMotor =  new OpenOneMotor();
+
   ArmLeader = OpenBicepMotor->Open(arm1);
-  OpenBicepMotor->Invert = true;
+ 
+  ArmLeader->SetSelectedSensorPosition(0,0,50);
   ArmFollower = OpenBicepMotor->Open(arm2);
   ArmFollower->Set(ctre::phoenix::motorcontrol::ControlMode::Follower, arm1);
   ArmLeader->Config_kP(0, armP, 0);
   ArmLeader->Config_kI(0, armI, 0);
   ArmLeader->Config_kD(0, armD, 0);
 }
+void Bicep::ResetSomething()
+{
+  something = true;
+}
 void Bicep::Rotato(double joystick) {
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
+    
+    
+     if (joystick == 0){
+       if (something){
+         currentPosition = ArmLeader->GetSelectedSensorPosition(0);
+         something = false;
+       }
+        ArmLeader->Config_kP(0, armManP, 0);
+        ArmLeader->Config_kI(0, armManI, 0);
+        ArmLeader->Config_kD(0, armManD, 0);
+        ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,static_cast<double>(currentPosition));
+   }
+    else{
+      something = true;
+      ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
+    }
+  
+  
 }
-void Bicep::BicepCurl(double setPoint){
-  ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,setPoint);
-}
-bool Bicep::WeighIn(double setPoint){
-  if ((Robot::m_oi.ReturnManualLeftYAxis() != 0) || (Robot::m_oi.ReturnManualRightYAxis() != 0)) {
-    frc::Scheduler::GetInstance()->RemoveAll();
+void Bicep::BicepCurl(int setPoint){  
+  ArmLeader->Config_kP(0, armP, 0);
+  ArmLeader->Config_kI(0, armI, 0);
+  ArmLeader->Config_kD(0, armD, 0);
+ 
+  if (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError)
+  {
+    something = true;
+    currentPosition = ArmLeader->GetSelectedSensorPosition(0);
+    ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position, static_cast<double>(currentPosition));
   }
+  else{
+    something = true;
+    currentPosition = ArmLeader->GetSelectedSensorPosition(0);
+     ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::Position,static_cast<double>(setPoint));
+  }
+ 
+}
+bool Bicep::WeighIn(int setPoint){
   return (abs(ArmLeader->GetSelectedSensorPosition(0) - setPoint) < armError);
 }
-
+double Bicep::ReturnBicepEncoder(){
+  return ArmLeader->GetSelectedSensorPosition(0);
+}
 void Bicep::InitDefaultCommand() {
   if (!initialized)
   {

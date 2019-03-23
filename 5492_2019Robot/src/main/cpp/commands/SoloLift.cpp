@@ -4,27 +4,25 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-#include "commands/BicepCurl.h"
 #include "Robot.h"
-#include "RobotMap.h"
-#include <iostream>
-BicepCurl::BicepCurl(int position) {
+#include "commands/SoloLift.h"
+
+SoloLift::SoloLift(int position) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_bicep);
-  BicepCurl::SetInterruptible(true);
+  SoloLift::SetInterruptible(true);
   setPoint = position;
   firstTime = true;
 }
 
 // Called just before this Command runs the first time
-void BicepCurl::Initialize() {
-   firstTime = true;
+void SoloLift::Initialize() {
+  firstTime = true;
 }
 
 // Called repeatedly when this Command is scheduled to run
-void BicepCurl::Execute() {
+void SoloLift::Execute() {
     if(firstTime)
     {
     setPoint = abs(setPoint) * (abs(Robot::m_bicep.ReturnBicepEncoder())/Robot::m_bicep.ReturnBicepEncoder());
@@ -37,21 +35,18 @@ void BicepCurl::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool BicepCurl::IsFinished() { 
+bool SoloLift::IsFinished() { 
   return (Robot::m_bicep.WeighIn(setPoint)); 
   }
 
 // Called once after isFinished returns true
-void BicepCurl::End() {
+void SoloLift::End() {
   firstTime = true;
   Robot::m_bicep.Rotato(0);
 }
- 
+
 // Called when another command which requires one or more of the same
-// subsystems is scheduledto run
-void BicepCurl::Interrupted()
-  
- {
+// subsystems is scheduled to run
+void SoloLift::Interrupted() {
   firstTime = true;
- 
 }

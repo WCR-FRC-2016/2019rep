@@ -19,4 +19,7 @@ class TankDrive : public frc::Command {
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+private:
+  int i = 5;
+  double cornerDiff = 0.0;
 };

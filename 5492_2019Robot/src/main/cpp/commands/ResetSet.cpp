@@ -4,54 +4,31 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-#include "commands/BicepCurl.h"
 #include "Robot.h"
-#include "RobotMap.h"
-#include <iostream>
-BicepCurl::BicepCurl(int position) {
+#include "commands/ResetSet.h"
+
+ResetSet::ResetSet() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
+  Requires(&Robot::m_doweevenlift);
   Requires(&Robot::m_bicep);
-  BicepCurl::SetInterruptible(true);
-  setPoint = position;
-  firstTime = true;
 }
 
 // Called just before this Command runs the first time
-void BicepCurl::Initialize() {
-   firstTime = true;
-}
+void ResetSet::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void BicepCurl::Execute() {
-    if(firstTime)
-    {
-    setPoint = abs(setPoint) * (abs(Robot::m_bicep.ReturnBicepEncoder())/Robot::m_bicep.ReturnBicepEncoder());
-    firstTime = false;
-
-    }
-  
-  Robot::m_bicep.BicepCurl(setPoint);
-
+void ResetSet::Execute() {
+  Robot::m_doweevenlift.ResetSomething();
+  Robot::m_bicep.ResetSomething();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool BicepCurl::IsFinished() { 
-  return (Robot::m_bicep.WeighIn(setPoint)); 
-  }
+bool ResetSet::IsFinished() { return true; }
 
 // Called once after isFinished returns true
-void BicepCurl::End() {
-  firstTime = true;
-  Robot::m_bicep.Rotato(0);
-}
- 
+void ResetSet::End() {}
+
 // Called when another command which requires one or more of the same
-// subsystems is scheduledto run
-void BicepCurl::Interrupted()
-  
- {
-  firstTime = true;
- 
-}
+// subsystems is scheduled to run
+void ResetSet::Interrupted() {}

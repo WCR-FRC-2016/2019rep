@@ -1,24 +1,14 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "Robot.h"
 #pragma once
-
-#include <frc/commands/Command.h>
-
-class BicepCurl : public frc::Command {
+class VisionerCornerFinder {
  public:
-  BicepCurl(int postition);
-  
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-private:
-  int setPoint;
-  bool firstTime = true;
+  double LostandFound(std::vector<double> xArray,std::vector<double> yArray);
+  VisionerCornerFinder();
 };

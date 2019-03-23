@@ -10,7 +10,7 @@
 #include "frc/commands/Scheduler.h"
 #include "RobotMap.h"
 
-SpotMe::SpotMe(double position) {
+SpotMe::SpotMe(int position) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(&Robot::m_doweevenlift);
@@ -37,6 +37,6 @@ void SpotMe::End() {
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void SpotMe::Interrupted() {
-  frc::Scheduler::GetInstance()->RemoveAll();
+  
   
 }

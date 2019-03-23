@@ -6,22 +6,18 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include <frc/commands/Subsystem.h>
 
-class DriveBase : public frc::Subsystem {
- private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  bool initialized = false;
-  double driveConstant = -1;
-  double speed = 1;
+#include <frc/commands/Command.h>
 
+class BicepHammer : public frc::Command {
  public:
-  DriveBase();
-  void DriveBaseInit();
-  void InitDefaultCommand() override;
-  void ArcadeDrive(double xAxis, double yAxis);
-  void RampSwitch(bool rampOn);
-  void reverseDrive(bool bButton);
-  void slowDrive(bool yButton);
+  BicepHammer(int position);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+private:
+  int setPoint;
+  bool firstTime = true;
 };

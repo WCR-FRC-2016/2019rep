@@ -25,12 +25,13 @@ class OI {
 	frc::JoystickButton* manStart;
 	double ReturnManualLeftYAxis();
 	double ReturnManualRightYAxis();
-
+	bool ReturnDriverYButton();
 	void OIInit();
 	double DeadBand(double joystick);
 
 	bool ReturnDriverXButton();
-	double visionData[2] = {0.0,0.0};
+	double visionData[3] = {0.0,0.0,0.0};
+	
 	bool* ReturnLightSensors();
 	bool lightData[2] = {false,false}; 
 	bool ReturnManualXButton();
@@ -52,6 +53,8 @@ class OI {
 	bool ReturnManualRightBumper();
 	bool ReturnManualYButton();
 	bool ReturnManualBButton();
+	std::vector<double> xCorners;
+	std::vector<double> yCorners;
  private:
   frc::XboxController * _driverStick;
 	frc::XboxController * _manualStick;

@@ -14,12 +14,14 @@ class DoWeEvenLift : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
   bool liftInitialized = false;
-
+  bool something = false;
  public:
   DoWeEvenLift();
   void LiftInit();
+  void ResetSomething();
   void Lift(double joystick);
-  void ChonkySquat(double position);
-  bool WeighIn(double setPoint);
+  void ChonkySquat(int position);
+  bool WeighIn(int setPoint);
   void InitDefaultCommand() override;
+  int currentPosition = 0;
 };
