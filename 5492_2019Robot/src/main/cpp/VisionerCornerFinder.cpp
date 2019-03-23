@@ -38,7 +38,9 @@ double VisionerCornerFinder::LostandFound(std::vector<double>  xArray, std::vect
             minXIndex = k;
         }
     }
-    return yArray[maxXIndex] - yArray[minXIndex];
+    printf("Rightval=%f\n",yArray[maxXIndex]);
+    printf("Leftval=%f\n",yArray[minXIndex]);
+    return (yArray[maxXIndex] - yArray[minXIndex]);
 }
 
 

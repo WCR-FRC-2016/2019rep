@@ -9,17 +9,15 @@
 
 #include <frc/commands/Command.h>
 
-class TankDrive : public frc::Command {
+class TricepCurl : public frc::Command {
  public:
-  TankDrive();
-  double prevError = 0.0;
-  bool Isee = false;
+  TricepCurl(int position);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
 private:
-  int i = 5;
-  double cornerDiff = 0.0;
+  int setPoint;
+  bool firstTime = true;
 };

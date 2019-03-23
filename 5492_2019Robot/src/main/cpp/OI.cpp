@@ -43,16 +43,16 @@ void OI::OIInit(){
 	LightSensorZero = new frc::DigitalInput(0);
 	LightSensorOne = new frc::DigitalInput(1);
 	manButtonX = new frc::JoystickButton(_manualStick, 3);
-	//manButtonY = new frc::JoystickButton(_manualStick, 4);
-	//manButtonB = new frc::JoystickButton(_manualStick, 2);
+	manButtonY = new frc::JoystickButton(_manualStick, 4);
+	manButtonB = new frc::JoystickButton(_manualStick, 2);
 	//manButtonA = new frc::JoystickButton(_manualStick, 1);
 	double habLevel[2] = {armHab, liftHab};
-	double lowLevel[2] = {armLow, liftLow};
+	double lowLevel[2] = {armLow, liftLow}; // this doesn't exist
 	double midLevel[2] = {armMid, liftMid};
 	double reverseLevel[2] = {-armHab, liftHab};
 	manButtonX->WhileHeld(new CleanAndJerk(habLevel));
-	//manButtonY->WhileHeld(new CleanAndJerk(midLevel));
-	//manButtonB->WhileHeld(new CleanAndJerk(lowLevel));
+	manButtonY->WhileHeld(new CleanAndJerk(midLevel));
+	manButtonB->WhileHeld(new CleanAndJerk(reverseLevel));
 	//manSelect->WhileHeld(new FirmlyGrasp(-manHarpoon));
 	//manStart->WhileHeld(new FirmlyGrasp(manHarpoon));
 	
@@ -113,10 +113,11 @@ double* OI::ReturnVisionX(){
 	visionData[0] = targetOffsetAngle_Horizontal;
 	visionData[1] = targetArea;
 
-	xCorners = table->GetNumberArray("tcornx", {0.0,0.0,0.0,0.0});
-	yCorners = table->GetNumberArray("tcorny", {0.0,0.0,0.0,0.0});
+	xCorners = table->GetNumberArray("tcornx", {1.0,0.0,0.0,0.0});
+	yCorners = table->GetNumberArray("tcorny", {1.0,0.0,0.0,0.0});
 	VisionerCornerFinder* CornerFinder = new VisionerCornerFinder();
 	visionData[2] = CornerFinder->LostandFound(xCorners, yCorners);
+	printf("Diff=%f\n",visionData[2]);
 	return visionData;
 }
 bool* OI::ReturnLightSensors() {

@@ -11,19 +11,39 @@
 #include "commands/DeadLift.h"
 #include "commands/Flex.h"
 #include "commands/ResetSet.h"
+#include "commands/BicepHammer.h"
+#include "commands/TricepCurl.h"
+#include "RobotMap.h"
+#include "commands/SoloLift.h"
 CleanAndJerk::CleanAndJerk(double setPoint[2]) {
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
   // these will run in order.
-  
-    AddSequential(new SpotMe(0));
-    AddSequential(new BicepCurl(setPoint[0]));
+  if (setPoint[0] == armHab){
+    //AddSequential(new SpotMe(0));
+    AddParallel(new BicepCurl(setPoint[0]));
     AddSequential(new SpotMe(setPoint[1]));
     AddSequential(new ResetSet());
     AddParallel(new Flex());
     AddSequential(new DeadLift());
-
+  }
+  else if (setPoint [0] == armMid){
+    //AddSequential(new SpotMe(0));
+    AddParallel(new BicepHammer(setPoint[0]));
+    AddSequential(new SpotMe(setPoint[1]));
+    AddSequential(new ResetSet());
+    AddParallel(new Flex());
+    AddSequential(new DeadLift());
+  }
+  else if (setPoint [0] = -armHab){
+    AddSequential(new SpotMe(0));
+    AddSequential(new TricepCurl(setPoint[0]));
+    AddSequential(new SpotMe(setPoint[1]));
+    AddSequential(new ResetSet());
+    AddParallel(new Flex());
+    AddSequential(new DeadLift());
+  }
   // To run multiple commands at the same time,
   // use AddParallel()
   // e.g. AddParallel(new Command1());
