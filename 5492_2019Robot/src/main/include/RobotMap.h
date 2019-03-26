@@ -53,13 +53,14 @@ const double armIncrement = 1;
 const double armP = 0.1625;
 const double armI = 0;
 const double armD = 0;
-const double armManP = 0.650;
+const double armManP = 0.750;
 const double armManI = 0;
 const double armManD = 0;
 
-const int armHab = 3577;
-const int armLow = 3577;
+const int armHab = 3500;
+const int armLow = 3500;
 const int armMid = 2825;
+const int armReverse = 400;
 const int armError = 50;
 
 const double armStopIt = -.115; //JOYSTICk value to put in forwads

@@ -30,16 +30,15 @@ CleanAndJerk::CleanAndJerk(double setPoint[2]) {
   }
   else if (setPoint [0] == armMid){
     //AddSequential(new SpotMe(0));
-    AddParallel(new BicepHammer(setPoint[0]));
+    AddSequential(new BicepHammer(setPoint[0]));
     AddSequential(new SpotMe(setPoint[1]));
     AddSequential(new ResetSet());
     AddParallel(new Flex());
     AddSequential(new DeadLift());
   }
-  else if (setPoint [0] = -armHab){
+  else if (setPoint [0] = -armReverse){
     AddSequential(new SpotMe(0));
     AddSequential(new TricepCurl(setPoint[0]));
-    AddSequential(new SpotMe(setPoint[1]));
     AddSequential(new ResetSet());
     AddParallel(new Flex());
     AddSequential(new DeadLift());

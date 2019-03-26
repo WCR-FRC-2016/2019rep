@@ -23,7 +23,7 @@ void Flex::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Flex::Execute() {
-  Robot::m_bicep.Rotato(-Robot::m_oi.ReturnManualRightYAxis()); // remove '-' for knoxville on R1
+  Robot::m_bicep.Rotato(Robot::m_oi.ReturnManualRightYAxis()); // remove '-' for knoxville on R1
 }
 
 // Make this return true when this Command no longer needs to run execute()

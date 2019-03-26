@@ -49,7 +49,7 @@ void OI::OIInit(){
 	double habLevel[2] = {armHab, liftHab};
 	double lowLevel[2] = {armLow, liftLow}; // this doesn't exist
 	double midLevel[2] = {armMid, liftMid};
-	double reverseLevel[2] = {-armHab, liftHab};
+	double reverseLevel[2] = {-armReverse, liftHab};
 	manButtonX->WhileHeld(new CleanAndJerk(habLevel));
 	manButtonY->WhileHeld(new CleanAndJerk(midLevel));
 	manButtonB->WhileHeld(new CleanAndJerk(reverseLevel));
