@@ -120,7 +120,7 @@ void OI::SwapLedMode(int mode)	{
 }
 void OI::SetStreamMode(){
 	// 0 standard sidebyside, 1 picture in picture main, 2 pip secondary 
-	if (_driverStick->GetStartButtonPressed){
+	if (_driverStick->GetStartButtonPressed()){
 		streamMode = (streamMode == 1)?2:1;
 	}
 	table->PutNumber("stream", streamMode);
