@@ -30,6 +30,7 @@ void TankDrive::Execute() {
   Robot::m_drivebase.slowDrive(Robot::m_oi.ReturnDriverYButton());
   if (Robot::m_oi.ReturnDriverXButton())
   {
+    Robot::m_oi.SetCamMode(0);
     Robot::m_oi.SwapLedMode(3);
     Robot::m_drivebase.RampSwitch(false);
     double CornerProptionalConstant = 0;
@@ -143,6 +144,7 @@ Far KP  |--|----- \
   else{
     Robot::m_drivebase.RampSwitch(true);
     Robot::m_oi.SwapLedMode(1);
+    Robot::m_oi.SetCamMode(1);
     Robot::m_drivebase.ArcadeDrive(Robot::m_oi.ReturnDriverXAxis(), -Robot::m_oi.ReturnDriverYAxis());
     Isee = false;
   }

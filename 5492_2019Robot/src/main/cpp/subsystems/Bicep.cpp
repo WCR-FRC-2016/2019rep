@@ -56,7 +56,7 @@ void Bicep::Rotato(double joystick) {
       something = true;
       ArmLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/3);
     }
-  
+    
   
 }
 void Bicep::BicepCurl(int setPoint){  

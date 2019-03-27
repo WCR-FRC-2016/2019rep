@@ -30,6 +30,8 @@ class OI {
 	double ReturnManualRightYAxis();
 	bool ReturnDriverYButton();
 	void OIInit();
+	void SetCamMode(int mode);
+	void SetStreamMode();
 	double DeadBand(double joystick);
 
 	bool ReturnDriverXButton();
@@ -42,7 +44,7 @@ class OI {
 	
 	bool ReturnDriverBButton();
 	void SwapLedMode(int mode);
-
+	int streamMode = 2;
 	double targetOffsetAngle_Horizontal;
  	 double targetOffsetAngle_Vertical;
  	 double targetArea;

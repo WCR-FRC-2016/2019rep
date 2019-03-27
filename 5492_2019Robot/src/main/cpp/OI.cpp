@@ -118,7 +118,17 @@ void OI::SwapLedMode(int mode)	{
 	//1 is off, 3 is on
 	table->PutNumber("ledMode",mode);
 }
-
+void OI::SetStreamMode(){
+	// 0 standard sidebyside, 1 picture in picture main, 2 pip secondary 
+	if (_driverStick->GetStartButtonPressed){
+		streamMode = (streamMode == 1)?2:1;
+	}
+	table->PutNumber("stream", streamMode);
+}
+void OI::SetCamMode(int mode) {
+	// 0 vision process, 1 driver cam
+	table->PutNumber("camMode", mode);
+}
 double* OI::ReturnVisionX(){
 	targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0); 
 	targetArea = table->GetNumber("ta",0.0);
