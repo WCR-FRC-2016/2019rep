@@ -16,7 +16,8 @@ const int backRightDrive = 0;
 const int RampTime = .5;
 //Collector
 const int cargoClaw = 5;
-
+const int endLift = 10;
+const int slide = 11;
 //Elevator
 const int lift1 = 2;//should be 2 , r2 is swapped
 const int lift2 = 3;

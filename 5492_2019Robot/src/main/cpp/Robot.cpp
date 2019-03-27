@@ -30,6 +30,8 @@ HatchHarpoon Robot::m_hatchharpoon;
 CargoClaw Robot::m_cargoclaw;
 DoWeEvenLift Robot::m_doweevenlift;
 Bicep Robot::m_bicep;
+Pectoral Robot::m_pectoral;
+SlipNSlide Robot::m_slipnslide;
 
 
 void Robot::RobotInit() {

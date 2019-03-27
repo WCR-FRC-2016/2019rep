@@ -19,6 +19,8 @@
 #include "subsystems/CargoClaw.h"
 #include "subsystems/DoWeEvenLift.h"
 #include "subsystems/Bicep.h"
+#include "subsystems/Pectoral.h"
+#include "subsystems/SlipNSlide.h"
 
 #include <networktables/NetworkTable.h>
 #include <networktables/NetworkTableEntry.h>
@@ -35,7 +37,8 @@ class Robot : public frc::TimedRobot {
   static CargoClaw m_cargoclaw;
   static DoWeEvenLift m_doweevenlift;
   static Bicep m_bicep;
-
+  static Pectoral m_pectoral;
+  static SlipNSlide m_slipnslide;
 
   void RobotInit() override;
   void RobotPeriodic() override;

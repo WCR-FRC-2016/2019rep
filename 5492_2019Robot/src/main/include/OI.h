@@ -16,7 +16,10 @@ class OI {
   OI(); 
 	double ReturnDriverXAxis();
 	double ReturnDriverYAxis();
-
+	bool ReturnDriverRightBumper();
+	bool ReturnDriverLeftBumper();
+	bool ReturnDriverAButton();
+	bool ReturnDriverRightTrigger();
 	frc::JoystickButton* manButtonX;
 	frc::JoystickButton* manButtonY;
 	frc::JoystickButton* manButtonB;
