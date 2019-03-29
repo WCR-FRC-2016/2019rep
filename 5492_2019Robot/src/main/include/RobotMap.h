@@ -22,18 +22,18 @@ const int slide = 11;
 const int lift1 = 2;//should be 2 , r2 is swapped
 const int lift2 = 3;
 
-const double liftP = 0.12;//.12
+const double liftP = 0.18;//.12
 const double liftI = 0;
 const double liftD = 0;
-const double liftManP = 0.1;
+const double liftManP = 0.125;
 const double liftManI = 0;
 const double liftManD = 0;
 
 const int liftHab = -4700;
 const int liftCollect = -4300;
 const int liftLow = 0;
-const int liftMid = -21039;
-const int liftError = 50;
+const int liftMid = -19000;
+const int liftError = 500;
 //Pneumatics
 const int harpoon = 4;
 
@@ -51,14 +51,15 @@ const int arm1 = 12;
 const int arm2 = 13;
 
 const double armIncrement = 1;
-const double armP = 0.1625;
+const double armP = 0.3
+;
 const double armI = 0;
 const double armD = 0;
-const double armManP = 0.750;
+const double armManP = 1;
 const double armManI = 0;
 const double armManD = 0;
 
-const int armHab = 3500;
+const int armHab = 3300;
 const int armLow = 3500;
 const int armMid = 2825;
 const int armReverse = 400;

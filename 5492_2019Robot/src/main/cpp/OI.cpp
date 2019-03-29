@@ -62,10 +62,10 @@ bool OI::ReturnDriverAButton() {
 	return _driverStick->GetAButtonPressed();
 }
 bool OI::ReturnDriverLeftBumper() {
-	return _driverStick->GetBumperPressed(frc::GenericHID::kLeftHand);
+	return _driverStick->GetBumper(frc::GenericHID::kLeftHand);
 }
 bool OI::ReturnDriverRightBumper() {
-	return _driverStick->GetBumperPressed(frc::GenericHID::kRightHand);
+	return _driverStick->GetBumper(frc::GenericHID::kRightHand);
 }
 bool OI::ReturnDriverRightTrigger() {
 	return (_driverStick->GetTriggerAxis(frc::GenericHID::kLeftHand) > 0.5);

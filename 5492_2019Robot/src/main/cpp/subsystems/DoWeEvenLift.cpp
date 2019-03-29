@@ -47,7 +47,7 @@ void DoWeEvenLift::Lift(double joystick){
    }
     else{
       something = true;
-      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/1.333);
+      LiftLeader->Set(ctre::phoenix::motorcontrol::ControlMode::PercentOutput,joystick/1.0);
     }
 }
 

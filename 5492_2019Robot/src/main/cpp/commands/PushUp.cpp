@@ -21,10 +21,10 @@ void PushUp::Initialize() {}
 void PushUp::Execute() {
   double motor = 0.0;
   if (Robot::m_oi.ReturnDriverLeftBumper()){
-    motor = 1.0;
+    motor = .60;
   }
   else if (Robot::m_oi.ReturnDriverRightBumper()){
-    motor = -1.0;
+    motor = -0.5;
   }
   else {
     motor = 0.0;
